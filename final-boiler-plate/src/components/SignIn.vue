@@ -1,50 +1,50 @@
 <template>
-  <div>Sign In</div>
-  <PersonalRouter :route="route" :buttonText="buttonText" />
-  <p>Time to build up the Final Project!</p>
-  <p class="wu-text">Wu Tang Forever</p>
-  <p v-if="errorMsg" class="">
-    {{ errorMsg }}
-  </p>
-  <form @submit.prevent="signIn">
-    <div class="">
-      <label class="" for="">Email</label>
-      <input
-        class=""
-        type="email"
-        placeholder="dave@wuTangfinancial.com"
-        v-model="email"
-        id="email"
-      />
-    </div>
-    <div class="mb-4">
-      <label class="" for="">Password</label>
-
-      <div class="">
+  <div class="main">
+    <h1>Sign In</h1>
+    <p v-if="errorMsg" class="">
+      {{ errorMsg }}
+    </p>
+    <form @submit.prevent="signIn">
+      <div class="text-field">
+        <input
+          class=""
+          type="email"
+          v-model="email"
+          id="email"
+          required
+        />
+        <span></span>
+        <label class="" for="">Email</label>
+      </div>
+      <div class="text-field">
         <input
           class=""
           :type="passwordFieldType"
           onpaste="return false"
-          placeholder="************"
           v-model="password"
           id="password"
+          required
         />
-        <span class="">
+        <span></span>
+        <label class="" for="">Password</label>
+        <!-- <span class="">
           <EyeIcon
             :class="[passwordFieldIcon]"
             @click.prevent="hidePassword = !hidePassword"
           />
-        </span>
+        </span> -->
       </div>
-    </div>
-
-    <button class="" type="submit">Sign In</button>
-    <p class="">
-      <span class="">Don’t have an account? </span>
-
-      <PersonalRouter :route="route" :buttonText="buttonText" />
-    </p>
-  </form>
+      <button class="btn-sign-in" type="submit">Sign In</button>
+      <p class="forgot-pass-link">
+        <span class="">Forgot password? </span>
+        <PersonalRouter class="signup-opt" :route="'/404'" :buttonText="'Restore password'" />
+      </p>
+      <p class="signup-link">
+        <span class="">Don’t have an account? </span>
+        <PersonalRouter class="signup-opt" :route="route" :buttonText="buttonText" />
+      </p>
+    </form>
+  </div>
 </template>
 
 <script setup>
@@ -57,7 +57,7 @@ import { storeToRefs } from "pinia";
 
 // Route Variables
 const route = "/auth/sign-up";
-const buttonText = "Test the Sign Up Route";
+const buttonText = "Sign Up instead";
 
 // Input Fields
 const email = ref("");
@@ -93,9 +93,115 @@ const signIn = async () => {
 };
 </script>
 
-<style>
-.wu-text {
-  color: black;
+<style scoped>
+
+.main {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ width: 400px;
+ background: white;
+ border-radius: 10px;
+}
+
+.main h1{
+  text-align: center;
+  padding: 0 0 20px 0;
+  border-bottom: 1px solid silver; 
+}
+
+.main form {
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+form .text-field {
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+
+.text-field input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.text-field label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.text-field span::before{
+  content: '';
+  position: absolute;
+  top: 40px;
+  left:0;
+  width: 0%;
+  height: 2px;
+  background: #2691d9;
+  transition: .5s;
+}
+
+.text-field input:focus ~ label,
+.text-field input:valid ~ label {
+  top: -5px;
+  color: #2691d9;
+}
+
+.text-field input:focus ~ span::before,
+.text-field input:valid ~ span::before {
+  width: 100%;
+}
+
+p {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 16px;
+  color: #666666;
+}
+
+p span {
+  text-decoration: none;
+  margin: -5px 0 20px 5px;
+  color: #a6a6a6;
+}
+
+.signup-opt {
+  text-decoration: none;
+  font-weight: 700;
+  color: #2691d9;
+}
+.signup-opt:hover {
+  text-decoration: underline;
+}
+
+.btn-sign-in {
+  width: 100%;
+  height: 50px;
+  border: 1px solid;
+  background: #2691d9;
+  border-radius: 25px;
+  font-size: 18px;
+  color: #e9f4fb;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn-sign-in:hover {
+  border-color: #2691d9;
+  transition: .5s;
 }
 
 .form {

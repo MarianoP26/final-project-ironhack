@@ -19,7 +19,7 @@ onMounted(async () => {
       router.push({ path: "/auth/login" });
     } else {
       // continue to dashboard
-      // router.push({ path: "/" });
+      router.push({ path: "/" });
     }
   } catch (e) {
     console.log(e);
@@ -33,4 +33,12 @@ onMounted(async () => {
   </div>
 </template>
 
-<style></style>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, #2980b9, #8e44ad);
+  height: 100vh;
+  overflow: hidden;
+}
+</style>

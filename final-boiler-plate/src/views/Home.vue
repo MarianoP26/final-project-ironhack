@@ -1,10 +1,23 @@
+<script setup>
+import Nav from '../components/Nav.vue';
+import Footer from '../components/Footer.vue';
+
+</script>
+
 <template>
-  <div>hello</div>
+  <div id="app">
+    <div class="main">
+      <Nav/>
+      <Footer/>
+    </div>
+  </div>
 </template>
 
-<script setup></script>
 
-<style></style>
+
+<style scoped>
+
+</style>
 
 <!-- 
 **Hints**

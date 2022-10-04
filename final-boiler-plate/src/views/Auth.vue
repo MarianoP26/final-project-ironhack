@@ -1,10 +1,16 @@
 <template>
-  <router-view></router-view>
+  <router-view class="test"></router-view>
 </template>
 
 <script setup></script>
 
-<style></style>
+<style scoped>
+
+.test {
+ 
+}
+
+</style>
 
 <!-- 
 **noHints**
