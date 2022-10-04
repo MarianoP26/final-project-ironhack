@@ -13,7 +13,7 @@ footer {
   background-color: #cfd8dc;
   bottom: 0;
   padding: 1rem;
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   font-size: 1rem;
   text-align: center;

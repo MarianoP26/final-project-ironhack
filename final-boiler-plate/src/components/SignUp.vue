@@ -107,7 +107,8 @@ async function signUp() {
 .main h1{
   text-align: center;
   padding: 0 0 20px 0;
-  border-bottom: 1px solid silver; 
+  border-bottom: 1px solid silver;
+  color: #2691d9; 
 }
 
 .main form {
