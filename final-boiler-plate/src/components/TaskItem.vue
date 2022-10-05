@@ -43,7 +43,7 @@ const textDeleteButton = computed(() => {
       </div>
       <div class="toggle-wrapper">
         <button :class="toggle" @click="$emit('toggleTask', task.id, !task.is_complete)">{{toggleTextButton}}</button>
-        <button class="btn">Edit</button>
+        <button class="btn" @click="$emit('editTask', task)">Edit</button>
         <button class="btn delete" @click="toggleConfirm" @dblclick="$emit('deleteTask', task.id)">{{textDeleteButton}}</button>
       </div>
     </div>

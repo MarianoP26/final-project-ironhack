@@ -21,7 +21,7 @@ export const useTaskStore = defineStore("tasks", {
         const { data, error } = await supabase.from("tasks").insert([
           {
             user_id: useUserStore().user.id,
-            title: task.name,
+            title: task.title,
             notes: task.notes,
             is_private: task.private,
             is_complete: false,
@@ -38,11 +38,11 @@ export const useTaskStore = defineStore("tasks", {
         .update({ is_complete: bool })
         .eq("id", id);
     },
-    async editTask(id, task) {
+    async editTask(task) {
       const { data, error } = await supabase
         .from("tasks")
-        .update({ title: task.title, description: task.notes, is_private: task.private })
-        .eq("id", id);
+        .update({ title: task.title, notes: task.notes, is_private: task.private })
+        .eq("id", task.id);
     },
     async deleteTask(id) {
       const { data, error } = await supabase

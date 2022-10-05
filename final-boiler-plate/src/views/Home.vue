@@ -8,34 +8,37 @@ import { ref, computed, watch, onMounted } from 'vue';
 
 const taskStore = useTaskStore();
 const tasks = ref([]);
+const taskToEdit = ref();
 
 const fetchTasks = async () => {
   tasks.value = await taskStore.fetchTasks();
 }
-
 const addNewTask = async (task) => {
   await taskStore.addTask(task);
+  fetchTasks();
 }
-
 const toggleTask = async (id, bool) => {
   await taskStore.toggleCompleteTask(id, bool);
+  fetchTasks();
 }
-
-const editTask = async (id, task) => {
-  await taskStore.editTask(id, task);
+const editTask = (task) => {
+  taskToEdit.value = task;
 }
-
+const updateTask = async (task) => {
+  console.log('editing');
+  await taskStore.editTask(task);
+  fetchTasks();
+}
 const deleteTask = async (id) => {
   await taskStore.deleteTask(id);
+  fetchTasks();
 }
-
 onMounted(() => {
   fetchTasks();
 })
-
-watch(taskStore, () => {
-  fetchTasks();
-})
+// watch(taskStore.tasks, () => {
+//   fetchTasks();
+// })
 </script>
 
 <template>
@@ -43,8 +46,8 @@ watch(taskStore, () => {
     <div class="main">
       <Nav/>
       <div class="todo-app">
-        <NewTask @addTask="addNewTask"/>
-        <TaskItem v-for="task, index in tasks" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask"/>
+        <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask"/>
+        <TaskItem v-for="task, index in tasks" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
       </div>
       <Footer/>
     </div>
