@@ -32,10 +32,10 @@ export const useTaskStore = defineStore("tasks", {
         console.log(error);
       }
     },
-    async toggleCompleteTask(id) {
+    async toggleCompleteTask(id, bool) {
       const { data, error } = await supabase
         .from("tasks")
-        .update({ is_complete: !is_complete })
+        .update({ is_complete: bool })
         .eq("id", id);
     },
     async editTask(id, task) {

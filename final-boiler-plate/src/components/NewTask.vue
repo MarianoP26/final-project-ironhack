@@ -1,17 +1,3 @@
-<template>
-  <div class="main">
-    <div class="header">
-      New task
-    </div>
-    <form @submit.prevent="validate">
-      <input class="taskname" type="text" placeholder="Task name" v-model="taskData.name">
-      <input class="tasknotes" type="text" placeholder="Task notes" v-model="taskData.notes">
-      <input class="checkbox" type="checkbox" v-model="taskData.private">
-      <input class="submit" type="submit" value="Add task">
-    </form>
-  </div>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 
@@ -45,6 +31,21 @@ function validate () {
 }
 
 </script>
+
+<template>
+  <div class="main">
+    <div class="header">
+      New task
+    </div>
+    <form @submit.prevent="validate">
+      <input class="taskname" type="text" placeholder="Task name" v-model="taskData.name">
+      <input class="tasknotes" type="text" placeholder="Task notes" v-model="taskData.notes">
+      <input class="checkbox" type="checkbox" v-model="taskData.private">
+      <input class="submit" type="submit" value="Add task">
+    </form>
+  </div>
+</template>
+
 
 <style scoped>
 
