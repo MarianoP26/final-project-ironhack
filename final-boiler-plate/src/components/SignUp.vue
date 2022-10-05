@@ -92,8 +92,6 @@ async function signUp() {
 </script>
 
 <style scoped>
-
-
 .main {
  position: absolute;
  top: 50%;

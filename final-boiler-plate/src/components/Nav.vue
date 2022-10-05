@@ -2,8 +2,14 @@
   <div class="main">
     <div class="navbar">
       <router-link class="btn-header" to="/">My Tasks</router-link>
-      <span class="title">Yet Another Task Manager</span>
-      <router-link class="btn-signout" to="/">Sign Out (todo)</router-link>
+      <div class="title-container">
+        <span>Welcome back <strong>Mariano</strong>!</span>
+        <span class="title">Yet Another Task Manager</span>
+      </div> 
+      <span>
+        Not you?
+        <router-link class="btn-signout" to="/">Sign Out</router-link>
+      </span>
     </div>
   </div>
 </template>
@@ -34,6 +40,14 @@
   height:  5rem;
 }
 
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .title {
   align-self: center;
   color: #eceff1;
@@ -55,7 +69,13 @@
   padding: 0.5rem;
   margin: 0 0.5rem;
   font-size: 1.5rem;
-  
+}
+
+.btn-signout {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 700;
+  color: darkred;
 }
 
 </style>

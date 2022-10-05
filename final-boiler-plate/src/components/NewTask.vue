@@ -1,19 +1,97 @@
 <template>
-  <div>New Task Component</div>
+  <div class="main">
+    <div class="header">
+      New task
+    </div>
+    <form @submit.prevent="validate">
+      <input class="taskname" type="text" placeholder="Task name" v-model="taskData.name">
+      <input class="tasknotes" type="text" placeholder="Task notes" v-model="taskData.notes">
+      <input class="checkbox" type="checkbox" v-model="taskData.private">
+      <input class="submit" type="submit" value="Add task">
+    </form>
+  </div>
 </template>
 
 <script setup>
-// constant to save a variable that define the custom event that will be emitted to the homeView
+import { ref } from 'vue';
 
-// constant to save a variable that holds the value of the title input field of the new task
+const emit = defineEmits(["addTask"]);
 
-// constant to save a variable that holds the value of the description input field of the new task
+const taskData = ref({
+  name: '',
+  notes: '',
+  private: false,
+});
 
-// constant to save a variable that holds an initial false boolean value for the errorMessage container that is conditionally displayed depending if the input field is empty
+const isError = ref(false);
 
-// const constant to save a variable that holds the value of the error message
+function validate () {
+  if (taskData.value.name) {
+    console.log('success');
+    emit("addTask", taskData.value);
+    taskData.value = {
+      name: '',
+      notes: '',
+      private: false,
+    }
+  }
+  else {
+    console.log('error');
+    isError.value = true;
+    setTimeout(() => {
+      isError.value = false;
+    },1500);
+  }
+}
 
-// arrow function to call the form holding the task title and task description that uses a conditional to first checks if the task title is empty, if true the error message is displayed through the errorMessage container and sets a timeOut method that hides the error after some time. Else, its emmits a custom event to the home view with the task title and task description; clears the task title and task description input fields.
 </script>
 
-<style></style>
+<style scoped>
+
+.main {
+  display: grid;
+}
+
+.header {
+  text-align: center;
+  font-size: 3rem;
+}
+
+form {
+  margin: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.taskname{
+  flex: 1 1 10ch;
+}
+
+.tasknotes {
+  flex: 3 1 30ch;
+}
+
+input {
+  border:none;
+  background: hsl(0, 0%, 93%);
+  border-radius: .25rem;
+  padding: .75rem 1rem;
+}
+
+.checkbox {
+  flex: 0 1 10ch;
+}
+
+.submit {
+  flex: 1 1 10ch;
+  background: hotpink;
+  color: white;
+  box-shadow: 0 .75rem .5rem -.5rem hsl(0, 50%, 80%);
+}
+
+.submit:hover {
+  cursor: pointer;
+}
+
+</style>

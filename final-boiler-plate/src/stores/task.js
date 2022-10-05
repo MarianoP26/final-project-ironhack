@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { supabase } from "../supabase";
 import { useUserStore } from "./user";
 
+
 export const useTaskStore = defineStore("tasks", {
   state: () => ({
     tasks: null,
@@ -15,17 +16,39 @@ export const useTaskStore = defineStore("tasks", {
       this.tasks = tasks;
       return this.tasks;
     },
-    // New code
-    async addTask(title, description) {
-      console.log(useUserStore().user.id);
-      const { data, error } = await supabase.from("tasks").insert([
-        {
-          user_id: useUserStore().user.id,
-          title: title,
-          is_complete: false,
-          description: description,
-        },
-      ]);
+    async addTask(task) {
+      try {
+        const { data, error } = await supabase.from("tasks").insert([
+          {
+            user_id: useUserStore().user.id,
+            title: task.name,
+            notes: task.notes,
+            is_private: task.private,
+            is_complete: false,
+          },
+        ]);
+        if(error) throw(error);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async toggleCompleteTask(id) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .update({ is_complete: !is_complete })
+        .eq("id", id);
+    },
+    async editTask(id, task) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .update({ title: task.title, description: task.notes, is_private: task.private })
+        .eq("id", id);
+    },
+    async deleteTask(id) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .delete()
+        .eq("id", id);
     },
   },
 });

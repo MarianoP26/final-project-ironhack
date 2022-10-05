@@ -1,13 +1,39 @@
 <script setup>
 import Nav from '../components/Nav.vue';
 import Footer from '../components/Footer.vue';
+import NewTask from '../components/NewTask.vue';
+import TaskItem from '../components/TaskItem.vue';
+import { useTaskStore } from "../stores/task.js";
+import { ref, computed, watch, onMounted } from 'vue';
 
+const taskStore = useTaskStore();
+const tasks = ref([]);
+
+const fetchTasks = async () => {
+  tasks.value = await taskStore.fetchTasks();
+}
+
+const addNewTask = async (task) => {
+  await taskStore.addTask(task);
+}
+
+onMounted(() => {
+  fetchTasks();
+})
+
+watch(taskStore, () => {
+  fetchTasks();
+})
 </script>
 
 <template>
   <div id="app">
     <div class="main">
       <Nav/>
+      <div class="todo-app">
+        <NewTask @addTask="addNewTask"/>
+        <TaskItem v-for="task, index in tasks" :key="index"/>
+      </div>
       <Footer/>
     </div>
   </div>
@@ -16,6 +42,10 @@ import Footer from '../components/Footer.vue';
 
 
 <style scoped>
+
+.todo-app {
+
+}
 
 </style>
 
