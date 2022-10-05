@@ -24,11 +24,7 @@ const textDeleteButton = computed(() => {
   return confirmDelete.value ? `Confirm?` : `Delete`;
 })
 
-
-
 </script>
-
-
 
 <template>
   <div class="main">

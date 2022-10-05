@@ -25,9 +25,9 @@ const editTask = (task) => {
   taskToEdit.value = task;
 }
 const updateTask = async (task) => {
-  console.log('editing');
   await taskStore.editTask(task);
   fetchTasks();
+  taskToEdit.value = ref();
 }
 const deleteTask = async (id) => {
   await taskStore.deleteTask(id);

@@ -1,99 +1,95 @@
 <script setup>
-import { ref, computed, defineProps, onUpdated } from 'vue';
+import { ref, computed, defineProps, onUpdated } from "vue";
 
-const emit = defineEmits(["addTask","updateTask"]);
+const emit = defineEmits(["addTask", "updateTask"]);
 const props = defineProps({
   task: Object,
-})
-
-const taskData = ref({
-  title: '',
-  notes: '',
+});
+let taskData = ref({
+  title: "",
+  notes: "",
   private: false,
 });
 
 const isError = ref(false);
 
 const heading = computed(() => {
-  return props.task ? 'Edit task' : 'New task';
-})
+  return props.task === undefined ? "New task" : "Edit task";
+});
 const submit = computed(() => {
-  return props.task ? 'Edit task' : 'Add task';
-})
+  console.log(props.task);
+  if (props.task === undefined) {
+    console.log('Crear task');
+    return 'Add task';
+  }else {
+    console.log('Editar task');
+    return 'Edit task';
+  }
+  // return props.task === undefined ? "Add task" : "Edit task";
+});
 
-function validate () {
+
+
+function validate() {
   if (!taskData.value.title) {
-    console.log('error');
+    console.log("error");
     isError.value = true;
     setTimeout(() => {
       isError.value = false;
-    },1500);
-  }
-  else {
+    }, 1500);
+  } else {
     if (!props.task) {
-      console.log('success');
       emit("addTask", taskData.value);
       taskData.value = {
-        title: '',
-        notes: '',
+        title: "",
+        notes: "",
         private: false,
-      }
-    }
-    else {
-      console.log('EDIT');
-      console.log('success');
+      };
+    } else {
       emit("updateTask", taskData.value);
       taskData.value = {
-        title: '',
-        notes: '',
+        title: "",
+        notes: "",
         private: false,
-      }
+      };
     }
   }
 }
 
 onUpdated(() => {
-  if(props.task) taskData.value = props.task;
-})
-
-// function validate2 () {
-//   if (taskData.value.title) {
-//     console.log('success');
-//     emit("addTask", taskData.value);
-//     taskData.value = {
-//       title: '',
-//       notes: '',
-//       private: false,
-//     }
-//   }
-//   else {
-//     console.log('error');
-//     isError.value = true;
-//     setTimeout(() => {
-//       isError.value = false;
-//     },1500);
-//   }
-// }
-
+  if (props.task) {
+    taskData.value = props.task;
+  } else {
+      return;
+  }
+});
 </script>
 
 <template>
   <div class="main">
     <div class="header">
-      {{heading}}
+      {{ heading }}
     </div>
     <form @submit.prevent="validate">
-      <input class="taskname" type="text" placeholder="Task name" v-model="taskData.title">
-      <input class="tasknotes" type="text" placeholder="Task notes" v-model="taskData.notes">
-      <input class="checkbox" type="checkbox" v-model="taskData.private">
-      <input class="submit" type="submit" :value="submit">
+      <input
+        class="taskname"
+        type="text"
+        placeholder="Task name"
+        v-model="taskData.title"
+      />
+      <input
+        class="tasknotes"
+        type="text"
+        placeholder="Task notes"
+        v-model="taskData.notes"
+      />
+      <input class="checkbox" type="checkbox" v-model="taskData.private" />
+      <input class="submit" type="submit" :value="submit" />
     </form>
   </div>
 </template>
 
-
 <style scoped>
-
 .main {
   display: grid;
 }
@@ -110,7 +106,7 @@ form {
   gap: 1rem;
 }
 
-.taskname{
+.taskname {
   flex: 1 1 10ch;
 }
 
@@ -119,10 +115,10 @@ form {
 }
 
 input {
-  border:none;
+  border: none;
   background: hsl(0, 0%, 93%);
-  border-radius: .25rem;
-  padding: .75rem 1rem;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
 }
 
 .checkbox {
@@ -133,11 +129,10 @@ input {
   flex: 1 1 10ch;
   background: hotpink;
   color: white;
-  box-shadow: 0 .75rem .5rem -.5rem hsl(0, 50%, 80%);
+  box-shadow: 0 0.75rem 0.5rem -0.5rem hsl(0, 50%, 80%);
 }
 
 .submit:hover {
   cursor: pointer;
 }
-
 </style>
