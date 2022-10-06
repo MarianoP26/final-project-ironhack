@@ -23,6 +23,30 @@ const toggleTextButton = computed(() => {
 const textDeleteButton = computed(() => {
   return confirmDelete.value ? `Confirm?` : `Delete`;
 })
+const timestampToDate = computed (() => {
+  let now = Date.now();
+  let then = new Date(props.task.inserted_at);
+  let diffInSeconds = Math.abs(now - then) / 1000;
+  const days = Math.floor(diffInSeconds / 86400);
+  diffInSeconds -= days * 86400;
+
+  const hours = Math.floor(diffInSeconds / 3600) % 24;
+  diffInSeconds -= hours * 3600;
+
+  const minutes = Math.floor(diffInSeconds / 60) % 60;
+  diffInSeconds -= minutes * 60;
+
+  let result = '';
+  if (days > 0) {
+    result += (days === 1) ? `${days} day, ` : `${days} days, `;
+  }
+  if (hours > 0) {
+    result += (hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
+  }
+  result += (minutes === 0 || hours === 1 ) ? `${minutes} minutes ago` : `${minutes} minutes ago`;
+
+  return result;
+})
 
 </script>
 
@@ -31,7 +55,7 @@ const textDeleteButton = computed(() => {
     <div :class="task.is_complete && 'container finished' || 'container'">
       <div class="wrapper">
         <div class="banner-image">
-          {{task.inserted_at}}
+          {{timestampToDate}}
         </div>
         <h1>{{task.title}}</h1>
         <p>{{task.notes}}</p>
@@ -51,8 +75,6 @@ const textDeleteButton = computed(() => {
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
-
-
 .container {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -66,6 +88,8 @@ const textDeleteButton = computed(() => {
   align-items: center;
   justify-content:center;
   text-align: center;
+  width: 554px;
+  height: 298px;
 }
 
 .finished {

@@ -11,6 +11,11 @@ const tasks = ref([]);
 const taskToEdit = ref();
 const flag = ref(false);
 
+const sortedTasks = computed(() => {
+  let sorted = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
+  return sorted;
+})
+
 const fetchTasks = async () => {
   tasks.value = await taskStore.fetchTasks();
 }
@@ -39,9 +44,6 @@ const deleteTask = async (id) => {
 onMounted(() => {
   fetchTasks();
 })
-// watch(taskStore.tasks, () => {
-//   fetchTasks();
-// })
 </script>
 
 <template>
@@ -51,9 +53,11 @@ onMounted(() => {
       <div class="todo-app">
         <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" :flag="flag"/>
         <div class="tasks">
-          <TaskItem v-for="task, index in tasks" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
+          <TaskItem v-for="task, index in sortedTasks" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
         </div>
-        
+        <div class="test">
+          <!-- {{sortedTasks}} -->
+        </div>
       </div>
       <Footer/>
     </div>
