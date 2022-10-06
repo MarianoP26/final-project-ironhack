@@ -82,6 +82,7 @@ onUpdated(() => {
 <style scoped>
 .main {
   display: grid;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
 }
 
 .header {
@@ -119,7 +120,7 @@ input {
   flex: 1 1 10ch;
   background: hotpink;
   color: white;
-  box-shadow: 0 0.75rem 0.5rem -0.5rem hsl(0, 50%, 80%);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .submit:hover {

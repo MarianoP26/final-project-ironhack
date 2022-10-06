@@ -69,6 +69,7 @@ onMounted(() => {
 <style scoped>
 
 .tasks {
+  margin-top:0.3rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
