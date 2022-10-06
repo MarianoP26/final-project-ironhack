@@ -1,16 +1,3 @@
-# final-boiler-plate
-
-This template should help get you started developing the final project running on Vue 3 with the composition API, Pinia as a state management tool, vue router, vite and lastly Supabase running on the backend.
-
-This is meant as an advanced starter ready to plug in your supabase variables and run directly on a local server already connected to your Supabase instance. 
-
-You are given some functions to see how the supabase ecosystem works with Vue and more specifically, pinia as a state management tool.
-
-You can add any CSS framework of your liking like tailwindCSS, Bootstrap, MaterialUI or many of the cool libaries that exist in the web. 
-
-## Important
-This app is not setUp to be deployed to a production environment like vercel or netlify. 
-
 
 ## Project Setup
 
@@ -19,7 +6,6 @@ npm install
 ```
 
 ## Set Up your Environment Variables from Supabase located at the root folder of the project
-
 ```sh
 VITE_SUPABASE_URL
 VITE_SUPABASE_ANON_KEY 
@@ -31,37 +17,24 @@ VITE_SUPABASE_ANON_KEY
 ```sh
 npm run dev
 ```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Good Music is always key!
-
-```sh
-Wu Tang Clan
-A tribe called quest
-Kendrick Lamar
-Outkast
-Dr. Dre
-N.W.A
-De La Soul 
-Ms. Lauryn Hill
-J. Cole 
-Guts
-Naughty By Nature
-People under the stairs
-Nujabes
-NAS
-KRS-One
-The Pharcyde
-Jurassic 5
-Gang starr
-Jay Z
-Mobb Depp
-Common
-Lil Supa
-```
-[Hip Hop Spotify Playlist](https://open.spotify.com/playlist/4vKftyhS1gQovakehVcq1u?si=a7a119382dfe40da)
+## Day 1
+Applied CSS to SignIn & SignUp components with some transitions.
+Created a placeholder navbar & footer.
+Created the main layout for the Home page.
+Completed the task.js store to have all the functionalities ready to be used.
+Added NewTask component to the Home page with its styles and logic fully working.
+## Day 2
+Added Delete logic and its styles.
+Also added a functionality to confirm the delete action before actually deleting.
+Added ToggleComplete logic and its styles.
+Ended the CRUD functionality with some bugs in Edit mode.
+## Day 3
+Fixed the Edit mode bug (before 9:00 am).
+Plan for today:
+  · Change taskitem size to be able to show more of them (including responsiveness)
+  · Refactor Home component:
+    - Create a filter to show/hide tasks based on if its completed.
+    - Create a sorter to sort tasks ascending/descending based on its tamestamp
+  · Change how the timestamp value is shown with de idea to show how many minutes/hours/days passed since the creation of the task.
+  · Upon task completion, show how many minutes/hours/days took to complete it since its creation.
+  · If free time: Polish styles.
