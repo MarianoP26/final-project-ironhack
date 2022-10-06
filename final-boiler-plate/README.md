@@ -30,11 +30,11 @@ Added ToggleComplete logic and its styles.
 Ended the CRUD functionality with some bugs in Edit mode.  
 ## Day 3
 Fixed the Edit mode bug (before 9:00 am).  
+Changed taskitem size to be able to show more of them (including responsiveness)  
+Change how the timestamp value is shown with de idea to show how many days/hours/minutes passed since the creation of the task.  
+Polished some styles.  
 Plan for today:  
-  · Change taskitem size to be able to show more of them (including responsiveness)  
   · Refactor Home component:  
     - Create a filter to show/hide tasks based on if its completed.  
     - Create a sorter to sort tasks ascending/descending based on its tamestamp  
-  · Change how the timestamp value is shown with de idea to show how many minutes/hours/days passed since the creation of the task.  
-  · Upon task completion, show how many minutes/hours/days took to complete it since its creation.  
-  · If free time: Polish styles.  
+  · Upon task completion, show how many minutes/hours/days took to complete it since its creation.   
