@@ -34,7 +34,5 @@ Changed taskitem size to be able to show more of them (including responsiveness)
 Change how the timestamp value is shown with de idea to show how many days/hours/minutes passed since the creation of the task.  
 Polished some styles.  
 Plan for today:  
-  · Refactor Home component:  
-    - Create a filter to show/hide tasks based on if its completed.  
-    - Create a sorter to sort tasks ascending/descending based on its tamestamp  
+  · Create a filter to show/hide tasks based on if its completed.  
   · Upon task completion, show how many minutes/hours/days took to complete it since its creation.   
