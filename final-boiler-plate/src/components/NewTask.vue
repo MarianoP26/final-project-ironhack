@@ -4,6 +4,7 @@ import { ref, computed, defineProps, onUpdated } from "vue";
 const emit = defineEmits(["addTask", "updateTask"]);
 const props = defineProps({
   task: Object,
+  flag: Boolean,
 });
 let taskData = ref({
   title: "",
@@ -14,21 +15,11 @@ let taskData = ref({
 const isError = ref(false);
 
 const heading = computed(() => {
-  return props.task === undefined ? "New task" : "Edit task";
+  return !props.flag ? 'New Task' : 'Edit Task';
 });
 const submit = computed(() => {
-  console.log(props.task);
-  if (props.task === undefined) {
-    console.log('Crear task');
-    return 'Add task';
-  }else {
-    console.log('Editar task');
-    return 'Edit task';
-  }
-  // return props.task === undefined ? "Add task" : "Edit task";
+  return !props.flag ? 'Add Task' : 'Edit Task';
 });
-
-
 
 function validate() {
   if (!taskData.value.title) {
@@ -38,7 +29,7 @@ function validate() {
       isError.value = false;
     }, 1500);
   } else {
-    if (!props.task) {
+    if (!props.flag) {
       emit("addTask", taskData.value);
       taskData.value = {
         title: "",
@@ -57,10 +48,9 @@ function validate() {
 }
 
 onUpdated(() => {
-  if (props.task) {
+  if (props.flag) {
     taskData.value = props.task;
-  } else {
-      return;
+    console.log(props.flag);
   }
 });
 </script>

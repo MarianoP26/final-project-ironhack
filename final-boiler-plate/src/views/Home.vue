@@ -9,6 +9,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 const taskStore = useTaskStore();
 const tasks = ref([]);
 const taskToEdit = ref();
+const flag = ref(false);
 
 const fetchTasks = async () => {
   tasks.value = await taskStore.fetchTasks();
@@ -23,11 +24,13 @@ const toggleTask = async (id, bool) => {
 }
 const editTask = (task) => {
   taskToEdit.value = task;
+  flag.value = true;
 }
 const updateTask = async (task) => {
   await taskStore.editTask(task);
   fetchTasks();
   taskToEdit.value = ref();
+  flag.value = false;
 }
 const deleteTask = async (id) => {
   await taskStore.deleteTask(id);
@@ -46,8 +49,11 @@ onMounted(() => {
     <div class="main">
       <Nav/>
       <div class="todo-app">
-        <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask"/>
-        <TaskItem v-for="task, index in tasks" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
+        <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" :flag="flag"/>
+        <div class="tasks">
+          <TaskItem v-for="task, index in tasks" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
+        </div>
+        
       </div>
       <Footer/>
     </div>
@@ -58,8 +64,13 @@ onMounted(() => {
 
 <style scoped>
 
-.todo-app {
-
+.tasks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
 }
 
 </style>
