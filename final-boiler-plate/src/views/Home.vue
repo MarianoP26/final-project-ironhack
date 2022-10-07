@@ -3,15 +3,17 @@ import Nav from '../components/Nav.vue';
 import Footer from '../components/Footer.vue';
 import NewTask from '../components/NewTask.vue';
 import TaskItem from '../components/TaskItem.vue';
+import FilterPanel from '../components/FilterPanel.vue';
 import { useTaskStore } from "../stores/task.js";
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const taskStore = useTaskStore();
 const tasks = ref([]);
 const taskToEdit = ref();
-const flag = ref(false);
+const flag = ref(false);  //edit flag
+const isFilterActive = ref(false);
 
-const sortedTasks = computed(() => {
+const defaultSortedTasks = computed(() => {
   let sorted = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   return sorted;
 })
@@ -19,28 +21,48 @@ const sortedTasks = computed(() => {
 const fetchTasks = async () => {
   tasks.value = await taskStore.fetchTasks();
 }
+
 const addNewTask = async (task) => {
   await taskStore.addTask(task);
   fetchTasks();
 }
+
 const toggleTask = async (id, bool) => {
   await taskStore.toggleCompleteTask(id, bool);
   fetchTasks();
 }
+
 const editTask = (task) => {
   taskToEdit.value = task;
   flag.value = true;
 }
+
 const updateTask = async (task) => {
   await taskStore.editTask(task);
   fetchTasks();
   taskToEdit.value = ref();
   flag.value = false;
 }
+
 const deleteTask = async (id) => {
   await taskStore.deleteTask(id);
   fetchTasks();
 }
+
+const applyFilters = (filters) => {
+  console.log(filters);
+  let result = tasks.value;
+  if (filters.completed !== 0) {   //Toggles  between only completed / only no completed
+    filters.completed === 1 ? result = result.filter((task) => task.is_complete) : result = result.filter((task) => !task.is_complete);
+  }
+
+  if (filters.time !== 0) {    // Toggles between time desc / time asc
+    filters.time === 1 ? result.reverse() : console.log('ascending');
+  }
+  
+  console.log(result);
+}
+
 onMounted(() => {
   fetchTasks();
 })
@@ -52,11 +74,13 @@ onMounted(() => {
       <Nav/>
       <div class="todo-app">
         <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" :flag="flag"/>
-        <div class="tasks">
-          <TaskItem v-for="task, index in sortedTasks" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
-        </div>
-        <div class="test">
-          <!-- {{sortedTasks}} -->
+        <div class="container">
+          <div class="tasks">
+            <div class="task-list-header">
+              <FilterPanel @sendFilters="applyFilters"/>
+            </div>
+            <TaskItem v-for="task, index in defaultSortedTasks" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
+          </div>
         </div>
       </div>
       <Footer/>
@@ -68,6 +92,12 @@ onMounted(() => {
 
 <style scoped>
 
+.container {
+
+}
+
+
+
 .tasks {
   margin-top:0.3rem;
   display: flex;
@@ -77,6 +107,8 @@ onMounted(() => {
   justify-content: center;
   gap: 0.3rem;
 }
+
+
 
 </style>
 
