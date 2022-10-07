@@ -33,6 +33,9 @@ Fixed the Edit mode bug (before 9:00 am).
 Changed taskitem size to be able to show more of them (including responsiveness)  
 Change how the timestamp value is shown with de idea to show how many days/hours/minutes passed since the creation of the task.  
 Polished some styles.  
+Changed navbar and home backgrounds
+## Day 4
 Plan for today:  
+  · Create a filter panel component to handle which tasks are rendered.  
   · Create a filter to show/hide tasks based on if its completed.  
-  · Upon task completion, show how many minutes/hours/days took to complete it since its creation.   
+  · Upon task completion, show how many minutes/hours/days took to complete it since its creation.(new column on db).    
