@@ -2,16 +2,28 @@
 import { ref, computed } from 'vue';
 import Button from './utils/Button.vue';
 
-const ALL_PATH = "src/assets/icons/all.png";
+const FILTER_OFF = 0;
+const FILTER_ON = 1;
+const FILTER_ON_MAX = 2;
+
+//Completion filters
+const ALL_COMPLETE_PATH = "src/assets/icons/all.png";
 const COMPLETED_PATH = "src/assets/icons/completed.png";
 const NO_COMPLETED_PATH = "src/assets/icons/no_completed.png";
+//Private filters
+const ALL_PRIVATE_PATH = "src/assets/icons/all.png";
+const PRIVATE_PATH = "src/assets/icons/private.png";
+const PUBLIC_PATH = "src/assets/icons/public.png";
+//Time filters
 const TIME_DESC_PATH = "src/assets/icons/timedesc.png";
 const TIME_ASC_PATH = "src/assets/icons/timeasc.png";
+//Alpha filters
 const ALPHA_DESC_PATH = "src/assets/icons/alphadesc.png";
 const ALPHA_ASC_PATH = "src/assets/icons/alphaasc.png";
 
 const filterStates = ref({
   completed: 0,  // 1 - Only completed | 2 - Only Pending | 0 Off
+  private: 0,    // 1 - Only private | 2 - Only public | 0 Off
   time: 0,       // 1 - Descending | 2 - Ascending | 0 Off
   alpha: 0,      // 1 - Descending | 2 - Ascending | 0 Off
 })
@@ -19,21 +31,25 @@ const filterStates = ref({
 const emit = defineEmits(["sendFilters"]);
 
 const completedFilterState = computed(() => {
-  if (filterStates.value.completed === 0) return NO_COMPLETED_PATH;
-  return filterStates.value.completed === 1 ? COMPLETED_PATH : NO_COMPLETED_PATH;
+  if (filterStates.value.completed === FILTER_OFF) return ALL_COMPLETE_PATH;
+  return filterStates.value.completed === FILTER_ON ? COMPLETED_PATH : NO_COMPLETED_PATH;
+})
+const privateFilterState = computed(() => {
+  if (filterStates.value.private === FILTER_OFF) return ALL_PRIVATE_PATH;
+  return filterStates.value.private === FILTER_ON ? PRIVATE_PATH : PUBLIC_PATH;
 })
 const timeFilterState = computed(() => {
-  if (filterStates.value.time === 0) return TIME_DESC_PATH;
-  return filterStates.value.time === 1 ? TIME_DESC_PATH : TIME_ASC_PATH;
+  if (filterStates.value.time === FILTER_OFF) return TIME_DESC_PATH;
+  return filterStates.value.time === FILTER_ON ? TIME_DESC_PATH : TIME_ASC_PATH;
 })
 const alphaFilterState = computed(() => {
-  if (filterStates.value.alpha === 0) return ALPHA_DESC_PATH;
-  return filterStates.value.alpha === 1 ? ALPHA_DESC_PATH : ALPHA_ASC_PATH;
+  if (filterStates.value.alpha === FILTER_OFF) return ALPHA_DESC_PATH;
+  return filterStates.value.alpha === FILTER_ON ? ALPHA_DESC_PATH : ALPHA_ASC_PATH;
 })
 
 const nextCompleted = (filterState) => {
-  if (filterState === 2) {
-    filterStates.value.completed = 0;
+  if (filterState === FILTER_ON_MAX) {
+    filterStates.value.completed = FILTER_OFF;
     emitFilters();
     return;
   }
@@ -43,9 +59,21 @@ const nextCompleted = (filterState) => {
     return;
   }
 }
+const nextPrivate = (filterState) => {
+  if (filterState === FILTER_ON_MAX) {
+    filterStates.value.private = FILTER_OFF;
+    emitFilters();
+    return;
+  }
+  else{
+    filterStates.value.private++;
+    emitFilters();
+    return;
+  }
+}
 const nextTime = (filterState) => {
-  if (filterState === 2) {
-    filterStates.value.time = 0;
+  if (filterState === FILTER_ON_MAX) {
+    filterStates.value.time = FILTER_OFF;
     emitFilters();
     return;
   }
@@ -56,8 +84,8 @@ const nextTime = (filterState) => {
   }
 }
 const nextAlpha = (filterState) => {
-  if (filterState === 2) {
-    filterStates.value.alpha = 0;
+  if (filterState === FILTER_ON_MAX) {
+    filterStates.value.alpha = FILTER_OFF;
     emitFilters();
     return;
   }
@@ -67,13 +95,20 @@ const nextAlpha = (filterState) => {
     return;
   }
 }
-
 const emitFilters = () => {
   emit("sendFilters", filterStates.value);
 }
 
+const resetFilterSettings = () => {
+  filterStates.value = {
+  completed: 0, 
+  private: 0,    
+  time: 0,       
+  alpha: 0,
+  }
+  emitFilters();
+}
 </script>
-
 
 <template>
   <div class="main">
@@ -82,8 +117,10 @@ const emitFilters = () => {
         <Button @click="nextCompleted(filterStates.completed)"><img :src="completedFilterState"></Button>
       </div>
       <div class="filters">
-        <Button @click="nextTime(filterStates.time)"><img :src="timeFilterState"></Button>
+        <button @click="resetFilterSettings">Reset filter</button>
         <Button @click="nextAlpha(filterStates.alpha)"><img :src="alphaFilterState"></Button>
+        <Button @click="nextPrivate(filterStates.private)"><img :src="privateFilterState"></Button>
+        <Button @click="nextTime(filterStates.time)"><img :src="timeFilterState"></Button>
       </div>
     </div>
   </div>
