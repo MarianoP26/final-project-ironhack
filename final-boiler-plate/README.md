@@ -54,6 +54,9 @@ Created searchbar filter in filter section.
 Searchbar works alongside other active filters.  
 Improved UI,UX in filter component.  
 Fixed all known issues regarding filters.  
+Refactor code @Navbar:  
+.-> Improved responsiveness
+.-> Added burger menu
 
 ## Future: TODO
   · Upon task completion, show how many minutes/hours/days took to complete it since its creation.(new column on db).    
