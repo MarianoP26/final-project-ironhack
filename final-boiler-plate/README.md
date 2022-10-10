@@ -55,25 +55,13 @@ Searchbar works alongside other active filters.
 Improved UI,UX in filter component.  
 Fixed all known issues regarding filters.  
 Refactor code @Navbar:  
-.-> Improved responsiveness
-.-> Added burger menu
+.-> Improved responsiveness  
+.-> Added burger menu  
+.-> Added emits  
+Refactor @Home now toggles between Tasks / Stats views.  
+Created UserStats component.  
 
-## Future: TODO
-  · Upon task completion, show how many minutes/hours/days took to complete it since its creation.(new column on db).    
-  · Create UserPanel component.  
-  · Show data from that particular User in the UserPanel as follows:  
-    · Total tasks created (including deleted).  
-    · Total tasks.  
-    · Total tasks completed.    
-    · Total tasks pending.  
-    · Max time a task has been pending.  
-    · Min time a task has been pending.  
-    · Average time to complete a task.(?)    
-    · Total task public.  
-    · Total task private.  
-  · Add a signout link in the UserPanel.  
-  - Ability to be able to see other user tasks (only public ones).  
-  - Ability to be able to see other user panels and look at their stats.  
-  - Add timer to a task (?).  
-    · Add in UserPanel total succeded tasks (before timer) and total failed tasks (timer ran out).(?)  
-  - Add priorities to a task and be able to sort based on it (?).  
+## Day 6: Plans
+- Burger menu on filter panel for smaller devices.  
+- Style UserStats Component.  
+- Create an advanced Tooltip component.  
