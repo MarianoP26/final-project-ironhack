@@ -26,6 +26,7 @@ const filterStates = ref({
   private: 0,    // 1 - Only private | 2 - Only public | 0 Off
   time: 0,       // 1 - Descending | 2 - Ascending | 0 Off
   alpha: 0,      // 1 - Descending | 2 - Ascending | 0 Off
+  search: '',
 })
 
 const emit = defineEmits(["sendFilters"]);
@@ -108,19 +109,23 @@ const resetFilterSettings = () => {
   }
   emitFilters();
 }
+
 </script>
 
 <template>
   <div class="main">
     <div class="container">
       <div class="toggler">
-        <Button @click="nextCompleted(filterStates.completed)"><img :src="completedFilterState"></Button>
+        <Button class="btn" @click="nextCompleted(filterStates.completed)"><img :src="completedFilterState"></Button>
+      </div>
+      <div class="searchbar">
+        <input type="text" placeholder="Search by title..." v-model="filterStates.search" @keyup="emitFilters">
       </div>
       <div class="filters">
         <button @click="resetFilterSettings">Reset filter</button>
-        <Button @click="nextAlpha(filterStates.alpha)"><img :src="alphaFilterState"></Button>
-        <Button @click="nextPrivate(filterStates.private)"><img :src="privateFilterState"></Button>
-        <Button @click="nextTime(filterStates.time)"><img :src="timeFilterState"></Button>
+        <Button :class="filterStates.alpha && 'btn-on' || 'btn-off'" @click="nextAlpha(filterStates.alpha)"><img :src="alphaFilterState"></Button>
+        <Button :class="filterStates.private && 'btn-on' || 'btn-off'" @click="nextPrivate(filterStates.private)"><img :src="privateFilterState"></Button>
+        <Button :class="filterStates.time && 'btn-on' || 'btn-off'" @click="nextTime(filterStates.time)"><img :src="timeFilterState"></Button>
       </div>
     </div>
   </div>
@@ -137,19 +142,25 @@ const resetFilterSettings = () => {
   background-color: rgb(119, 117, 117);
   align-items: center;
   justify-content: space-between;
-
-
+  background-image: url('../assets/filterheader.png');
+  background-size: cover;
 }
-
 .toggler {
   margin: 1rem;
 }
-
 .filters {
   margin: 1rem;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
+
+input {
+  position:relative;
+  left: 50%;
+  height: 24px;
+  font-size: 18px;
+}
+
 
 @media only screen and (max-width:1285px) { 
 	.container {

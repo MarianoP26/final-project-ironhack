@@ -56,6 +56,10 @@ const applyFilters = (filters) => {
     filters.completed === FILTER_ON ? result = result.filter((task) => task.is_complete) : result = result.filter((task) => !task.is_complete);
   }
 
+  if (filters.search) {
+    result = result.filter((task) => task.title.includes(filters.search));
+  }
+
    if (filters.private !== FILTER_OFF) {   //Toggles between only private / only public
     filters.private === FILTER_ON ? result = result.filter((task) => task.is_private) : result = result.filter((task) => !task.is_private);
   }
@@ -67,6 +71,8 @@ const applyFilters = (filters) => {
   if (filters.alpha !== FILTER_OFF) {     // Toggles between A-Z / Z-A
     filters.alpha === FILTER_ON ? result.sort((a, b) => a.title.localeCompare(b.title)) : result.sort((a, b) => a.title.localeCompare(b.title)).reverse();
   }
+
+
   (filters.completed || filters.private || filters.time || filters.alpha) ? isFilterActive.value = true : isFilterActive.value = false;
   
   if (filters.completed === FILTER_OFF) result.sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
