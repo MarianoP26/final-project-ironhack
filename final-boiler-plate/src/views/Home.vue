@@ -4,6 +4,7 @@ import Footer from '../components/Footer.vue';
 import NewTask from '../components/NewTask.vue';
 import TaskItem from '../components/TaskItem.vue';
 import FilterPanel from '../components/FilterPanel.vue';
+import UserStats from '../components/UserStats.vue';
 import { useTaskStore } from "../stores/task.js";
 import { ref, onMounted } from 'vue';
 
@@ -17,6 +18,7 @@ const filteredTasksList = ref([]);
 const taskToEdit = ref();
 const flag = ref(false);  //edit flag
 const isFilterActive = ref(false);
+const showStats = ref(false);
 
 const fetchTasks = async () => {
   tasks.value = await taskStore.fetchTasks();
@@ -79,6 +81,10 @@ const applyFilters = (filters) => {
   filteredTasksList.value = result;
 }
 
+const applyStatus = (isTask) => {
+  showStats.value = !isTask;
+} 
+
 onMounted(() => {
   fetchTasks();
 })
@@ -87,8 +93,11 @@ onMounted(() => {
 <template>
   <div id="app">
     <div class="main">
-      <Nav/>
-      <div class="todo-app">
+      <Nav @status="applyStatus"/>
+      <div v-if="showStats" class="stats">
+        <UserStats />
+      </div>
+      <div v-else class="todo-app">
         <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" :flag="flag"/>
         <div class="container">
           <div class="tasks">

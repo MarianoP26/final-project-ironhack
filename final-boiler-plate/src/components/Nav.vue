@@ -1,3 +1,38 @@
+<script setup>
+import { useUserStore } from "../stores/user";
+import { ref, computed } from 'vue';
+
+const emit = defineEmits(["status"]);
+
+const user = ref(useUserStore().user.email.split('@')[0]);
+const isActive = ref(false);
+const isTaskActive = ref(true);
+
+const signOutMsg = computed(() => {
+  return isActive.value ? '' : '';
+});
+const currentTasks = computed(() => {
+  return isTaskActive.value ? 'btn-nav current' : 'btn-nav';
+})
+const currentStats = computed(() => {
+  return !isTaskActive.value ? 'btn-nav current' : 'btn-nav';
+})
+
+const resolveStats = () => {
+  isTaskActive.value = false;
+  emitStatus();
+}
+const resolveTasks = () => {
+  isTaskActive.value = true;
+  emitStatus();
+}
+
+const emitStatus = () => {
+  emit('status', isTaskActive.value);
+}
+
+</script>
+
 <template>
   <nav class="main">
     <div class="navbar">
@@ -6,10 +41,10 @@
       </div> 
       <div :class="isActive && 'items active' || 'items'">
         <div class="tasks">
-          <router-link class="btn-header" to="/">Tasks</router-link>
+          <router-link @click="resolveTasks" :class="currentTasks" to="/">Tasks</router-link>
         </div>
         <div class="stats">
-          <router-link class="btn-stats" to="/">Stats</router-link>
+          <router-link @click="resolveStats" :class="currentStats" to="/">Stats</router-link>
         </div>
         <div class="logout">
           <span>
@@ -25,17 +60,6 @@
   </nav>
 </template>
 
-<script setup>
-import { useUserStore } from "../stores/user";
-import { ref, computed } from 'vue';
-
-const user = ref(useUserStore().user.email.split('@')[0]);
-const isActive = ref(false);
-const signOutMsg = computed(() => {
-  return isActive.value ? '' : '';
-});
-
-</script>
 
 <style scoped>
 
@@ -77,6 +101,7 @@ const signOutMsg = computed(() => {
   font-weight: bold;
   margin-right: 1rem;
   letter-spacing: 2px;
+  transition: .5s;
 }
 
 .toggler {
@@ -140,7 +165,7 @@ const signOutMsg = computed(() => {
   }
 }
 
-.btn-header, .btn-stats{
+.btn-nav{
   /* background-color: #455a64; */
   border: none;
   border-radius: 3px;
@@ -154,6 +179,15 @@ const signOutMsg = computed(() => {
   margin: 0 0.5rem;
   font-size: 1.5rem;
   font-weight: 900;
+  transition: .5s;
+}
+.btn-nav:hover {
+  box-shadow: 0 0 0 4px #333, 0 0 0 6px #83ff3b;
+}
+
+.current {
+  box-shadow: 0 0 0 4px #333, 0 0 0 6px #83ff3b;
+  color:#83ff3b;
 }
 
 .btn-signout {

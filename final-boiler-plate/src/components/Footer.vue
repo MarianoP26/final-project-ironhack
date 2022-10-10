@@ -9,11 +9,11 @@
 <style scoped>
 
 footer {
+  /* position: sticky; */
+  bottom:0;
   box-sizing: border-box;
   background-color: #cfd8dc;
-  bottom: 0;
   padding: 1rem;
-  /* position: absolute; */
   width: 100%;
   font-size: 1rem;
   text-align: center;
