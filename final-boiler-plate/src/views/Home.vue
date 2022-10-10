@@ -5,7 +5,7 @@ import NewTask from '../components/NewTask.vue';
 import TaskItem from '../components/TaskItem.vue';
 import FilterPanel from '../components/FilterPanel.vue';
 import { useTaskStore } from "../stores/task.js";
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 
 //Filters consts
 const FILTER_OFF = 0;
@@ -73,7 +73,7 @@ const applyFilters = (filters) => {
   }
 
 
-  (filters.completed || filters.private || filters.time || filters.alpha) ? isFilterActive.value = true : isFilterActive.value = false;
+  (filters.completed || filters.private || filters.time || filters.alpha || filters.search) ? isFilterActive.value = true : isFilterActive.value = false;
   
   if (filters.completed === FILTER_OFF) result.sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   filteredTasksList.value = result;
