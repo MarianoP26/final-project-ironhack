@@ -49,13 +49,14 @@ Refactored some come in Home component due to new logic incorporated from the fi
 Added icons, mostly placeholders, for each filter (off, desc, asc).  
 Gave some layout css to these filters (shitty atm).  
 
-## Day 5, 6 & 7 (saturday, sunday, monday)
-If a plan has "(?)" at the end of it means those are ideas and im not sure if i will end up doing it.
-Plan for day 5, 6 & 7:  
+## Day 5(monday the tenth)
+Created searchbar filter in filter section.  
+Improved UI,UX in filter component.  
+Fixed all known issues regarding filters.  
+
+
+## Future: TODO
   · Upon task completion, show how many minutes/hours/days took to complete it since its creation.(new column on db).    
-  · Add searchbar filter in filter section.  
-  · Fix all issues regarding filters.  
-  · Style the shit out of those filters.  
   · Create UserPanel component.  
   · Show data from that particular User in the UserPanel as follows:  
     · Total tasks created (including deleted).  
@@ -68,8 +69,6 @@ Plan for day 5, 6 & 7:
     · Total task public.  
     · Total task private.  
   · Add a signout link in the UserPanel.  
-
-## Future: TODO
   - Ability to be able to see other user tasks (only public ones).  
   - Ability to be able to see other user panels and look at their stats.  
   - Add timer to a task (?).  

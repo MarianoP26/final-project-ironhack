@@ -11,7 +11,7 @@ const ALL_COMPLETE_PATH = "src/assets/icons/all.png";
 const COMPLETED_PATH = "src/assets/icons/completed.png";
 const NO_COMPLETED_PATH = "src/assets/icons/no_completed.png";
 //Private filters
-const ALL_PRIVATE_PATH = "src/assets/icons/all.png";
+const ALL_PRIVATE_PATH = "src/assets/icons/public.png";
 const PRIVATE_PATH = "src/assets/icons/private.png";
 const PUBLIC_PATH = "src/assets/icons/public.png";
 //Time filters
