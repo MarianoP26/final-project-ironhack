@@ -6,7 +6,7 @@
       </div> 
       <div :class="isActive && 'items active' || 'items'">
         <div class="tasks">
-          <router-link class="btn-header" to="/">My Tasks</router-link>
+          <router-link class="btn-header" to="/">Tasks</router-link>
         </div>
         <div class="stats">
           <router-link class="btn-stats" to="/">Stats</router-link>
@@ -32,7 +32,7 @@ import { ref, computed } from 'vue';
 const user = ref(useUserStore().user.email.split('@')[0]);
 const isActive = ref(false);
 const signOutMsg = computed(() => {
-  return isActive.value ? '' : 'Not you?'
+  return isActive.value ? '' : '';
 });
 
 </script>
@@ -122,6 +122,10 @@ const signOutMsg = computed(() => {
     border: 1px solid brown;
   }
 
+  .btn-header, .btn-stats {
+    color: darkgoldenrod;
+  }
+
   .tasks,.stats,.logout {
 
   }
@@ -137,18 +141,19 @@ const signOutMsg = computed(() => {
 }
 
 .btn-header, .btn-stats{
-  background-color: #455a64;
+  /* background-color: #455a64; */
   border: none;
   border-radius: 3px;
   box-shadow: 0 0 0 0.5px rgba(49,49,93,.03),
     0 2px 5px 0 rgba(49,49,93,.1),
     0 1px 2px 0 rgba(0, 0, 0, .08);
-  color: #b0bec5;
+  color: rgb(248, 64, 64);
   cursor: pointer;
   text-decoration: none;
   padding: 0.5rem;
   margin: 0 0.5rem;
   font-size: 1.5rem;
+  font-weight: 900;
 }
 
 .btn-signout {
