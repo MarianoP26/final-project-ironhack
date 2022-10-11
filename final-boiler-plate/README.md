@@ -61,20 +61,27 @@ Refactor code @Navbar:
 Refactor @Home now toggles between Tasks / Stats views.  
 Created UserStats component mounted @Home.  
 
-## Day 6: Plans
-- DONE: Deploy to Vercel.  
-- Style UserStats Component.  
+## Day 6:
+- Deploy to Vercel.  
+- Style only layout UserStats Component.  
 - Apply logic to UserStats.  
-- Create Tooltip component.  
+- Refactor @Home due to new logic coming from @UserStats.  
+- Refactor @Navbar due to new logic coming from @UserStats.  
+- Changed almost all placeholder icons to the build version icons instead.  
+- @UserStats redirects to @Home with filters applied based on stat clicked to show @TaskItems meeting the criteria.  
+- Added new filters @UserStats.  
 
-## Plan for before end of project  
+## Day 7 Plans:
+- Create Tooltip component.  
 - Burger menu on filter panel for smaller devices.  
-- Improve general responsiveness in all components.  
 - Swap placeholders icons / text styles.  
+- Improve general responsiveness in all components.  
 - Change / configure backgrounds images and stylings.  
 - Basically, improve in general the UI/UX.  
 - Add Logo Title @Signin & @Signup.  
 - @TaskItem if timestamp = (0 minutes ago) then > "Just now" || "Less than a minute".  
 - @TaskItem remove "pending" text.  
-- Google signin method.  
 - If tasks is empty then show text to user > "Currently you have no tasks".  
+
+## Plan for before end of project  
+- Google signin method.  
