@@ -96,7 +96,7 @@ onMounted(() => {
     <div class="main">
       <Nav @status="applyStatus"/>
       <div v-if="showStats" class="stats">
-        <UserStats />
+        <UserStats :tasks="tasks"/>
       </div>
       <div v-else class="todo-app">
         <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" :flag="flag"/>
