@@ -96,7 +96,6 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
         </div>
         <h1>{{task.title}} <span v-if="task.is_private"><img src="images/padlock.png"></span><span v-if="task.is_complete"><img src="images/tick.png" alt=""></span></h1>
         <p>{{task.notes}}</p>
-        <p>{{task.is_complete && `Finished` || `Pending`}}</p>
       </div>
       <div class="toggle-wrapper">
         <button :class="toggle" @click="$emit('toggleTask', task.id, !task.is_complete)">{{toggleTextButton}}</button>
@@ -135,7 +134,7 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
 }
 
 .finished {
-  opacity: 0.3;
+  background-color: rgba(0, 168, 50, 0.25);
 }
 
 .wrapper {
