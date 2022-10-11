@@ -8,36 +8,27 @@
     <div class="container">
       <div class="content">
         <div class="heading">
-          UserName
+          <h3>UserName Stats</h3>
         </div>
-        <div class="data">
-          Total tasks: number(number)
-          <div class="subdata">
-            <div>
-              Completed: number
+        <div class="body">
+          <div class="box">
+            <div class="box-header">
+              Main stat
             </div>
-            <div>
-              Pending: number
+            <div class="box-body">
+              Other stats
             </div>
           </div>
-        </div>
-        <div class="data">
-          Total public: number
-        </div>
-        <div class="data">
-          Total private: number
-        </div>
-        <div class="data">
-          Task maximum time: number
-        </div>
-        <div class="data">
-          Task minimum time: number
-        </div>
-        <div class="data">
-          Task average time: number
-        </div>
-        <div class="signout">
-          Signout
+          <div class="box">
+            <div class="box-body">
+              Other stats
+            </div>
+          </div>
+          <div class="box">
+            <div class="box-body">
+              Other stats
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -47,14 +38,17 @@
 
 <style scoped>
 
-.container {
-  margin: 2rem 4rem;
-  height: 800px;
+.heading {
+  border-bottom: 1px solid black;
+  width: auto;
+  margin: 1rem auto;
+  max-width: 75vw;
 }
 
-.content {
-  display: flex;
-
+.heading h3{
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 28px;
 }
 
 </style>

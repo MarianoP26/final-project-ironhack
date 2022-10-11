@@ -7,19 +7,19 @@ const FILTER_ON = 1;
 const FILTER_ON_MAX = 2;
 
 //Completion filters
-const ALL_COMPLETE_PATH = "src/assets/icons/all.png";
-const COMPLETED_PATH = "src/assets/icons/completed.png";
-const NO_COMPLETED_PATH = "src/assets/icons/no_completed.png";
+const ALL_COMPLETE_PATH = "all.png";
+const COMPLETED_PATH = "completed.png";
+const NO_COMPLETED_PATH = "no_completed.png";
 //Private filters
-const ALL_PRIVATE_PATH = "src/assets/icons/public.png";
-const PRIVATE_PATH = "src/assets/icons/private.png";
-const PUBLIC_PATH = "src/assets/icons/public.png";
+const ALL_PRIVATE_PATH = "public.png";
+const PRIVATE_PATH = "private.png";
+const PUBLIC_PATH = "public.png";
 //Time filters
-const TIME_DESC_PATH = "src/assets/icons/timedesc.png";
-const TIME_ASC_PATH = "src/assets/icons/timeasc.png";
+const TIME_DESC_PATH = "timedesc.png";
+const TIME_ASC_PATH = "timeasc.png";
 //Alpha filters
-const ALPHA_DESC_PATH = "src/assets/icons/alphadesc.png";
-const ALPHA_ASC_PATH = "src/assets/icons/alphaasc.png";
+const ALPHA_DESC_PATH = "alphadesc.png";
+const ALPHA_ASC_PATH = "alphaasc.png";
 
 const filterStates = ref({
   completed: 0,  // 1 - Only completed | 2 - Only Pending | 0 Off

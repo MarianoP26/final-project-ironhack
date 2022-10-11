@@ -88,6 +88,7 @@ const applyStatus = (isTask) => {
 onMounted(() => {
   fetchTasks();
 })
+
 </script>
 
 <template>
@@ -112,8 +113,6 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-
 
 <style scoped>
 
