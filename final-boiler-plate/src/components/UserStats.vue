@@ -18,17 +18,98 @@ const publicTasks = computed(() => {
   return props.tasks.filter((task) => !task.is_private).length;
 })
 const privateTasks = computed(() => {
-  return props.tasks.filter((task) => task.is_complete).length;
+  return props.tasks.filter((task) => task.is_private).length;
 })
 const avgTimeCompletion = computed(() => {
-  return props.tasks.filter((task) => task.is_complete).length;
-})
-const minTimeCompletion = computed(() => {
-  return props.tasks.filter((task) => task.is_complete).length;
+  let shallowTasks = [...props.tasks].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
+  let completedTasks = [...shallowTasks].filter((task) => task.is_complete).reverse();
+  let timer = [];
+  for (let i = 0; i < completedTasks.length; i++) {
+    let dateCompleted = new Date(completedTasks[i].completed_at).getTime();
+    let dateCreated = new Date(completedTasks[i].inserted_at).getTime();
+    timer.push(dateCompleted - dateCreated);
+  }
+  let totalTime = 0;
+  for (let i = 0; i < timer.length; i++){
+    totalTime += timer[i];
+  }
+  let avgTime = totalTime / timer.length;
+  return toTime(avgTime);
 })
 const maxTimeCompletion = computed(() => {
-  return props.tasks.filter((task) => task.is_complete).length;
+  let shallowTasks = [...props.tasks].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
+  let completedTasks = [...shallowTasks].filter((task) => task.is_complete).reverse();
+    let timer = [];
+    completedTasks.forEach((task) => {
+    let completedAt = new Date(task.completed_at);
+    let createdAt = new Date(task.inserted_at);
+    timer.push(completedAt - createdAt);
+  })
+  return toTime(Math.max(...timer));
 })
+const minTimeCompletion = computed(() => {
+  let shallowTasks = [...props.tasks].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
+  let completedTasks = [...shallowTasks].filter((task) => task.is_complete).reverse();
+  let timer = [];
+  completedTasks.forEach((task) => {
+    let completedAt = new Date(task.completed_at);
+    let createdAt = new Date(task.inserted_at);
+    timer.push(completedAt - createdAt);
+  })
+  return toTime(Math.min(...timer));
+})
+const maxTimePending = computed(() => {
+  let pendingTasks = [...props.tasks].filter((task) => !task.is_complete);
+  let maxPendingTimeTask = pendingTasks[pendingTasks.length - 1];
+  return timestampToRenderString(maxPendingTimeTask.inserted_at);
+})
+
+const toTime = (timestamp) => { // Just a translator from Milliseconds to Days Hours Minutes
+  let seconds = timestamp / 1000;
+  const days = Math.floor(seconds / 86400);
+  seconds -= days * 86400;
+
+  const hours = Math.floor(seconds / 3600) % 24;
+  seconds -= hours * 3600;
+
+  const minutes = Math.floor(seconds / 60) % 60;
+  seconds -= minutes * 60;
+
+  let result = '';
+  if (days > 0) {
+    result += (days === 1) ? `${days} day, ` : `${days} days, `;
+  }
+  if (hours > 0) {
+    result += (hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
+  }
+  result += (minutes === 0 || hours === 1 ) ? `${minutes} minutes` : `${minutes} minutes`;
+
+  return result;
+}
+const timestampToRenderString = (timestamp) => { // Compares passed timestamp to current date to calculate time passed, returns ddhhmm
+  let now = Date.now();
+  let then = new Date(timestamp);
+  let diffInSeconds = Math.abs(now - then) / 1000;
+  const days = Math.floor(diffInSeconds / 86400);
+  diffInSeconds -= days * 86400;
+
+  const hours = Math.floor(diffInSeconds / 3600) % 24;
+  diffInSeconds -= hours * 3600;
+
+  const minutes = Math.floor(diffInSeconds / 60) % 60;
+  diffInSeconds -= minutes * 60;
+
+  let result = '';
+  if (days > 0) {
+    result += (days === 1) ? `${days} day, ` : `${days} days, `;
+  }
+  if (hours > 0) {
+    result += (hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
+  }
+  result += (minutes === 0 || hours === 1 ) ? `${minutes} minutes` : `${minutes} minutes`;
+
+  return result;
+}
 
 </script>
 
@@ -65,6 +146,7 @@ const maxTimeCompletion = computed(() => {
               <h3>Average completion time: {{avgTimeCompletion}}</h3>
               <h4>Minimum completion time: {{minTimeCompletion}}</h4>
               <h4>Maximum completion time: {{maxTimeCompletion}}</h4>
+              <h4>Maximum task pending time: {{maxTimePending}}</h4>
             </div>
           </div>
         </div>
