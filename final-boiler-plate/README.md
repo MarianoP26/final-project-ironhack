@@ -59,7 +59,7 @@ Refactor code @Navbar:
 .-> Added burger menu  
 .-> Added emits  
 Refactor @Home now toggles between Tasks / Stats views.  
-Created UserStats component.  
+Created UserStats component mounted @Home.  
 
 ## Day 6: Plans
 - Style UserStats Component.  
@@ -72,4 +72,9 @@ Created UserStats component.
 - Swap placeholders icons / text styles.  
 - Change / configure backgrounds images and stylings.  
 - Basically, improve in general the UI/UX.  
+- Add Logo Title @Signin & @Signup.  
+- @TaskItem if timestamp = (0 minutes ago) then > "Just now" || "Less than a minute".  
+- @TaskItem remove "pending" text.  
+- Google signin method.  
+- If tasks is empty then show text to user > "Currently you have no tasks".  
 - Deploy to Vercel.  
