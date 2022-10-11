@@ -62,6 +62,14 @@ Refactor @Home now toggles between Tasks / Stats views.
 Created UserStats component.  
 
 ## Day 6: Plans
-- Burger menu on filter panel for smaller devices.  
 - Style UserStats Component.  
-- Create an advanced Tooltip component.  
+- Apply logic to UserStats.  
+- Create Tooltip component.  
+
+## Plan for before end of project  
+- Burger menu on filter panel for smaller devices.  
+- Improve general responsiveness in all components.  
+- Swap placeholders icons / text styles.  
+- Change / configure backgrounds images and stylings.  
+- Basically, improve in general the UI/UX.  
+- Deploy to Vercel.  
