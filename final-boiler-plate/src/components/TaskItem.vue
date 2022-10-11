@@ -23,9 +23,23 @@ const toggleTextButton = computed(() => {
 const textDeleteButton = computed(() => {
   return confirmDelete.value ? `Confirm?` : `Delete`;
 })
-const timestampToDate = computed (() => {
+const timeCreated = computed(() => {
+  let inserted_at = new Date(props.task.inserted_at);
+  return toTimeCompare(inserted_at);
+})
+const timeTookToDate = computed(() => {
+  let completed_at = new Date(props.task.completed_at);
+  let inserted_at = new Date(props.task.inserted_at);
+  let timePassed = completed_at - inserted_at;
+  return toTime(timePassed);
+})
+const completedToDate = computed(() => {
+  let completed_at = new Date(props.task.completed_at);
+  return toTimeCompare(completed_at);
+})
+const toTimeCompare = (timestamp) => { // Compares passed timestamp to current date to calculate time passed, returns ddhhmm
   let now = Date.now();
-  let then = new Date(props.task.inserted_at);
+  let then = new Date(timestamp);
   let diffInSeconds = Math.abs(now - then) / 1000;
   const days = Math.floor(diffInSeconds / 86400);
   diffInSeconds -= days * 86400;
@@ -43,11 +57,32 @@ const timestampToDate = computed (() => {
   if (hours > 0) {
     result += (hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
   }
-  result += (minutes === 0 || hours === 1 ) ? `${minutes} minutes ago` : `${minutes} minutes ago`;
+  result += (minutes === 0 || hours === 1 ) ? `${minutes} minutes` : `${minutes} minutes`;
 
   return result;
-})
+}
+const toTime = (timestamp) => { // Just a translator from Milliseconds to Days Hours Minutes
+  let seconds = timestamp / 1000;
+  const days = Math.floor(seconds / 86400);
+  seconds -= days * 86400;
 
+  const hours = Math.floor(seconds / 3600) % 24;
+  seconds -= hours * 3600;
+
+  const minutes = Math.floor(seconds / 60) % 60;
+  seconds -= minutes * 60;
+
+  let result = '';
+  if (days > 0) {
+    result += (days === 1) ? `${days} day, ` : `${days} days, `;
+  }
+  if (hours > 0) {
+    result += (hours === 1) ? `${hours} hour, ` : `${hours} hours, `;
+  }
+  result += (minutes === 0 || hours === 1 ) ? `${minutes} minutes` : `${minutes} minutes`;
+
+  return result;
+}
 </script>
 
 <template>
@@ -55,7 +90,9 @@ const timestampToDate = computed (() => {
     <div :class="task.is_complete && 'container finished' || 'container'">
       <div class="wrapper">
         <div class="banner-image">
-          {{timestampToDate}}
+          <span>Created {{timeCreated}} ago</span>
+          <span v-if="task.is_complete">Completed {{completedToDate}} ago</span>
+          <span v-if="task.is_complete">Time took {{timeTookToDate}}</span>
         </div>
         <h1>{{task.title}}</h1>
         <p>{{task.notes}}</p>
@@ -90,6 +127,11 @@ const timestampToDate = computed (() => {
   text-align: center;
   width: 554px;
   height: 298px;
+}
+
+.banner-image {
+  display: flex;
+  flex-direction: column;
 }
 
 .finished {
