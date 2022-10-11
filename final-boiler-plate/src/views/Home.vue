@@ -91,7 +91,6 @@ const applyFilters = (filters) => {
   filteredTasksList.value = result;
 }
 const showTasks = (code, task) => {
-  console.log(code, task);
   showStats.value = false;
   let result = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   if (code === ALL_TASKS) filteredTasksList.value = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
@@ -99,12 +98,11 @@ const showTasks = (code, task) => {
   else if (code === PENDING_TASKS) filteredTasksList.value = result.filter((task) => !task.is_complete);
   else if (code === PUBLIC_TASKS) filteredTasksList.value = result.filter((task) => !task.is_private);
   else if (code === PRIVATE_TASKS) filteredTasksList.value = result.filter((task) => task.is_private);
-  else if (code === MIN_TIME_TASK) filteredTasksList.value = task;
-  else if (code === MAX_TIME_TASK) filteredTasksList.value = task;
-  else if (code === MAX_PENDING_TIME_TASK) filteredTasksList.value = task;
+  else if (code === MIN_TIME_TASK) filteredTasksList.value = [task];
+  else if (code === MAX_TIME_TASK) filteredTasksList.value = [task];
+  else if (code === MAX_PENDING_TIME_TASK) filteredTasksList.value = [task];
   else console.log('This should be never logged');
-
-  console.log(filteredTasksList.value);
+  console.log(task);
 }
 const applyStatus = (isTask) => {
   showStats.value = !isTask;

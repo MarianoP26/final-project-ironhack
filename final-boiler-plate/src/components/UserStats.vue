@@ -10,8 +10,8 @@ const emit = defineEmits(["showTasks"]);
 
 const user = ref(useUserStore().user.email.split('@')[0]);
 const maxPendingTimeTaskItem = ref();
-const minCompletedTimeTaskItem = ref();
-const maxCompletedTimeTaskItem = ref();
+const minCompletedTimeTaskItem = ref(); //todo
+const maxCompletedTimeTaskItem = ref(); //todo
 
 const completedTasks = computed(() => {
   return props.tasks.filter((task) => task.is_complete).length;
@@ -44,23 +44,49 @@ const avgTimeCompletion = computed(() => {
 const maxTimeCompletion = computed(() => {
   let shallowTasks = [...props.tasks].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   let completedTasks = [...shallowTasks].filter((task) => task.is_complete).reverse();
+
     let timer = [];
+    let taskItem = {};
+    let current = 0;
+    let currentMax = 0;
+
     completedTasks.forEach((task) => {
-    let completedAt = new Date(task.completed_at);
-    let createdAt = new Date(task.inserted_at);
-    timer.push(completedAt - createdAt);
-  })
+      let completedAt = new Date(task.completed_at);
+      let createdAt = new Date(task.inserted_at);
+      current = completedAt - createdAt;
+      timer.push(current);
+      if (current > currentMax) {
+        currentMax = current;
+        taskItem = task;
+      }
+    })
+  maxCompletedTimeTaskItem.value = taskItem;
   return toTime(Math.max(...timer));
 })
 const minTimeCompletion = computed(() => {
   let shallowTasks = [...props.tasks].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   let completedTasks = [...shallowTasks].filter((task) => task.is_complete).reverse();
+
   let timer = [];
+  let taskItem = {};
+  let current = 0;
+  let currentMin = 0;
+
   completedTasks.forEach((task) => {
     let completedAt = new Date(task.completed_at);
     let createdAt = new Date(task.inserted_at);
-    timer.push(completedAt - createdAt);
+    current = completedAt - createdAt;
+    timer.push(current);
+    if (current < currentMin) {
+        currentMin = current;
+        taskItem = task;
+    }
+    else if (currentMin === 0){
+        currentMin = current;
+        taskItem = task;
+    }
   })
+  minCompletedTimeTaskItem.value = taskItem;
   return toTime(Math.min(...timer));
 })
 const maxTimePending = computed(() => {
@@ -123,7 +149,6 @@ const redirect = (code, task) => {
 
 </script>
 
-
 <template>
   <div class="main">
     <div class="container">
@@ -154,8 +179,8 @@ const redirect = (code, task) => {
             </div>
             <div class="box-body">
               <h3>Average completion time: {{avgTimeCompletion}}</h3>
-              <h4 @click="redirect('MIN_TIME_TASK')">Minimum completion time: {{minTimeCompletion}}</h4>
-              <h4 @click="redirect('MAX_TIME_TASK')">Maximum completion time: {{maxTimeCompletion}}</h4>
+              <h4 @click="redirect('MIN_TIME_TASK', minCompletedTimeTaskItem)">Minimum completion time: {{minTimeCompletion}}</h4>
+              <h4 @click="redirect('MAX_TIME_TASK', maxCompletedTimeTaskItem)">Maximum completion time: {{maxTimeCompletion}}</h4>
               <h4 @click="redirect('MAX_PENDING_TIME_TASK', maxPendingTimeTaskItem)">Maximum task pending time: {{maxTimePending}}</h4>
             </div>
           </div>
