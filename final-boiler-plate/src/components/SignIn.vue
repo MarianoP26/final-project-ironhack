@@ -1,52 +1,3 @@
-<template>
-  <div class="main">
-    <h1>Sign In</h1>
-    <p v-if="errorMsg" class="">
-      {{ errorMsg }}
-    </p>
-    <form @submit.prevent="signIn">
-      <div class="text-field">
-        <input
-          class=""
-          type="email"
-          v-model="email"
-          id="email"
-          required
-        />
-        <span></span>
-        <label class="" for="">Email</label>
-      </div>
-      <div class="text-field">
-        <input
-          class=""
-          :type="passwordFieldType"
-          onpaste="return false"
-          v-model="password"
-          id="password"
-          required
-        />
-        <span></span>
-        <label class="" for="">Password</label>
-        <!-- <span class="">
-          <EyeIcon
-            :class="[passwordFieldIcon]"
-            @click.prevent="hidePassword = !hidePassword"
-          />
-        </span> -->
-      </div>
-      <button class="btn-sign-in" type="submit">Sign In</button>
-      <p class="forgot-pass-link">
-        <span class="">Forgot password? </span>
-        <PersonalRouter class="signup-opt" :route="'/404'" :buttonText="'Restore password'" />
-      </p>
-      <p class="signup-link">
-        <span class="">Don’t have an account? </span>
-        <PersonalRouter class="signup-opt" :route="route" :buttonText="buttonText" />
-      </p>
-    </form>
-  </div>
-</template>
-
 <script setup>
 import { ref, computed } from "vue";
 import PersonalRouter from "./PersonalRouter.vue";
@@ -92,6 +43,50 @@ const signIn = async () => {
   }
 };
 </script>
+
+<template>
+  <div class="main">
+    <h1>Sign In</h1>
+    <p v-if="errorMsg" class="">
+      {{ errorMsg }}
+    </p>
+    <form @submit.prevent="signIn">
+      <div class="text-field">
+        <input
+          class=""
+          type="email"
+          v-model="email"
+          id="email"
+          required
+        />
+        <span></span>
+        <label class="" for="">Email</label>
+      </div>
+      <div class="text-field">
+        <input
+          class=""
+          :type="passwordFieldType"
+          onpaste="return false"
+          v-model="password"
+          id="password"
+          required
+        />
+        <span></span>
+        <label class="" for="">Password</label>
+      </div>
+      <button class="btn-sign-in" type="submit">Sign In</button>
+      <p class="forgot-pass-link">
+        <span class="">Forgot password? </span>
+        <PersonalRouter class="signup-opt" :route="'/404'" :buttonText="'Restore password'" />
+      </p>
+      <p class="signup-link">
+        <span class="">Don’t have an account? </span>
+        <PersonalRouter class="signup-opt" :route="route" :buttonText="buttonText" />
+      </p>
+    </form>
+  </div>
+</template>
+
 
 <style scoped>
 
