@@ -7,19 +7,19 @@ const FILTER_ON = 1;
 const FILTER_ON_MAX = 2;
 
 //Completion filters
-const ALL_COMPLETE_PATH = "all.png";
-const COMPLETED_PATH = "completed.png";
-const NO_COMPLETED_PATH = "no_completed.png";
+const ALL_COMPLETE_PATH = "images/all.png";
+const COMPLETED_PATH = "images/completed.png";
+const NO_COMPLETED_PATH = "images/no_completed.png";
 //Private filters
-const ALL_PRIVATE_PATH = "public.png";
-const PRIVATE_PATH = "private.png";
-const PUBLIC_PATH = "public.png";
+const ALL_PRIVATE_PATH = "images/public.png";
+const PRIVATE_PATH = "images/private.png";
+const PUBLIC_PATH = "images/public.png";
 //Time filters
-const TIME_DESC_PATH = "timedesc.png";
-const TIME_ASC_PATH = "timeasc.png";
+const TIME_DESC_PATH = "images/timedesc.png";
+const TIME_ASC_PATH = "images/timeasc.png";
 //Alpha filters
-const ALPHA_DESC_PATH = "alphadesc.png";
-const ALPHA_ASC_PATH = "alphaasc.png";
+const ALPHA_DESC_PATH = "images/alphadesc.png";
+const ALPHA_ASC_PATH = "images/alphaasc.png";
 
 const filterStates = ref({
   completed: 0,  // 1 - Only completed | 2 - Only Pending | 0 Off
