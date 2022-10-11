@@ -6,7 +6,12 @@ const props = defineProps({
   tasks: Object,
 })
 
+const emit = defineEmits(["showTasks"]);
+
 const user = ref(useUserStore().user.email.split('@')[0]);
+const maxPendingTimeTaskItem = ref();
+const minCompletedTimeTaskItem = ref();
+const maxCompletedTimeTaskItem = ref();
 
 const completedTasks = computed(() => {
   return props.tasks.filter((task) => task.is_complete).length;
@@ -61,6 +66,7 @@ const minTimeCompletion = computed(() => {
 const maxTimePending = computed(() => {
   let pendingTasks = [...props.tasks].filter((task) => !task.is_complete);
   let maxPendingTimeTask = pendingTasks[pendingTasks.length - 1];
+  maxPendingTimeTaskItem.value = maxPendingTimeTask;
   return timestampToRenderString(maxPendingTimeTask.inserted_at);
 })
 
@@ -111,6 +117,10 @@ const timestampToRenderString = (timestamp) => { // Compares passed timestamp to
   return result;
 }
 
+const redirect = (code, task) => {
+  emit("showTasks", code, task);
+}
+
 </script>
 
 
@@ -128,13 +138,13 @@ const timestampToRenderString = (timestamp) => { // Compares passed timestamp to
             </div>
             <div class="box-body">
               <div class="one">
-                <h3>Total tasks: {{tasks.length}}</h3>
-                <h4>Completed tasks: {{completedTasks}}</h4>
-                <h4>Pending tasks: {{pendingTasks}}</h4>
+                <h3 @click="redirect('ALL_TASKS')">Total tasks: {{tasks.length}}</h3>
+                <h4 @click="redirect('COMPLETED_TASKS')">Completed tasks: {{completedTasks}}</h4>
+                <h4 @click="redirect('PENDING_TASKS')">Pending tasks: {{pendingTasks}}</h4>
               </div>
               <div class="two">
-                <h4>Public tasks: {{publicTasks}}</h4>
-                <h4>Private tasks: {{privateTasks}}</h4>
+                <h4 @click="redirect('PUBLIC_TASKS')">Public tasks: {{publicTasks}}</h4>
+                <h4 @click="redirect('PRIVATE_TASKS')">Private tasks: {{privateTasks}}</h4>
               </div>
             </div>
           </div>
@@ -144,9 +154,9 @@ const timestampToRenderString = (timestamp) => { // Compares passed timestamp to
             </div>
             <div class="box-body">
               <h3>Average completion time: {{avgTimeCompletion}}</h3>
-              <h4>Minimum completion time: {{minTimeCompletion}}</h4>
-              <h4>Maximum completion time: {{maxTimeCompletion}}</h4>
-              <h4>Maximum task pending time: {{maxTimePending}}</h4>
+              <h4 @click="redirect('MIN_TIME_TASK')">Minimum completion time: {{minTimeCompletion}}</h4>
+              <h4 @click="redirect('MAX_TIME_TASK')">Maximum completion time: {{maxTimeCompletion}}</h4>
+              <h4 @click="redirect('MAX_PENDING_TIME_TASK', maxPendingTimeTaskItem)">Maximum task pending time: {{maxTimePending}}</h4>
             </div>
           </div>
         </div>
@@ -195,11 +205,13 @@ h3 {
   border: 1px solid black;
   padding: 0.5rem;
   font-size: 28px;
+  cursor: pointer;
 }
 h4 {
   border: 1px solid black;
   padding: 0.5rem;
   font-size: 28px;
+  cursor: pointer;
 }
 
 </style>

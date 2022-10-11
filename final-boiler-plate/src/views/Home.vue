@@ -11,7 +11,17 @@ import { ref, onMounted } from 'vue';
 //Filters consts
 const FILTER_OFF = 0;
 const FILTER_ON = 1;
+//Code consts
+const ALL_TASKS = 'ALL_TASKS';
+const COMPLETED_TASKS = 'COMPLETED_TASKS';
+const PENDING_TASKS = 'PENDING_TASKS';
+const PUBLIC_TASKS = 'PUBLIC_TASKS';
+const PRIVATE_TASKS = 'PRIVATE_TASKS';
+const MIN_TIME_TASK = 'MIN_TIME_TASK';
+const MAX_TIME_TASK = 'MAX_TIME_TASK';
+const MAX_PENDING_TIME_TASK = 'MAX_PENDING_TIME_TASK';
 
+//Home setup
 const taskStore = useTaskStore();
 const tasks = ref([]);
 const filteredTasksList = ref([]);
@@ -80,7 +90,22 @@ const applyFilters = (filters) => {
   if (filters.completed === FILTER_OFF) result.sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   filteredTasksList.value = result;
 }
+const showTasks = (code, task) => {
+  console.log(code, task);
+  showStats.value = false;
+  let result = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
+  if (code === ALL_TASKS) filteredTasksList.value = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
+  else if (code === COMPLETED_TASKS) filteredTasksList.value = result.filter((task) => task.is_complete);
+  else if (code === PENDING_TASKS) filteredTasksList.value = result.filter((task) => !task.is_complete);
+  else if (code === PUBLIC_TASKS) filteredTasksList.value = result.filter((task) => !task.is_private);
+  else if (code === PRIVATE_TASKS) filteredTasksList.value = result.filter((task) => task.is_private);
+  else if (code === MIN_TIME_TASK) filteredTasksList.value = task;
+  else if (code === MAX_TIME_TASK) filteredTasksList.value = task;
+  else if (code === MAX_PENDING_TIME_TASK) filteredTasksList.value = task;
+  else console.log('This should be never logged');
 
+  console.log(filteredTasksList.value);
+}
 const applyStatus = (isTask) => {
   showStats.value = !isTask;
 } 
@@ -96,7 +121,7 @@ onMounted(() => {
     <div class="main">
       <Nav @status="applyStatus"/>
       <div v-if="showStats" class="stats">
-        <UserStats :tasks="tasks"/>
+        <UserStats :tasks="tasks" @showTasks="showTasks"/>
       </div>
       <div v-else class="todo-app">
         <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" :flag="flag"/>
