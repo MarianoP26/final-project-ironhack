@@ -7,7 +7,7 @@ const FILTER_ON = 1;
 const FILTER_ON_MAX = 2;
 
 //Completion filters
-const ALL_COMPLETE_PATH = "src/assets/icons/all.png";
+const ALL_COMPLETE_PATH = "/assets/icons/all.png";
 const COMPLETED_PATH = "src/assets/icons/completed.png";
 const NO_COMPLETED_PATH = "src/assets/icons/no_completed.png";
 //Private filters

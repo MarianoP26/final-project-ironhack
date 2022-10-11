@@ -62,6 +62,7 @@ Refactor @Home now toggles between Tasks / Stats views.
 Created UserStats component mounted @Home.  
 
 ## Day 6: Plans
+- DONE: Deploy to Vercel.  
 - Style UserStats Component.  
 - Apply logic to UserStats.  
 - Create Tooltip component.  
@@ -77,4 +78,3 @@ Created UserStats component mounted @Home.
 - @TaskItem remove "pending" text.  
 - Google signin method.  
 - If tasks is empty then show text to user > "Currently you have no tasks".  
-- Deploy to Vercel.  
