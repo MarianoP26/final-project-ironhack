@@ -94,7 +94,7 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
           <span v-if="task.is_complete">Completed {{completedToDate}} ago</span>
           <span v-if="task.is_complete">Time took {{timeTookToDate}}</span>
         </div>
-        <h1>{{task.title}}</h1>
+        <h1>{{task.title}} <span v-if="task.is_private"><img src="images/padlock.png"></span><span v-if="task.is_complete"><img src="images/tick.png" alt=""></span></h1>
         <p>{{task.notes}}</p>
         <p>{{task.is_complete && `Finished` || `Pending`}}</p>
       </div>
