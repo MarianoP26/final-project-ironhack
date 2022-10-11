@@ -1,35 +1,40 @@
 <script setup>
 import { useUserStore } from "../stores/user";
-import { ref, computed } from 'vue';
+import { ref, computed, onUpdated } from 'vue';
 
 const emit = defineEmits(["status"]);
+const props = defineProps({
+  showStats: Boolean,
+})
 
 const user = ref(useUserStore().user.email.split('@')[0]);
-const isActive = ref(false);
-const isTaskActive = ref(true);
+const isActive = ref(false); //responsive related
+const isStats = ref(props.showStats);
 
-const signOutMsg = computed(() => {
-  return isActive.value ? '' : '';
+const signOutMsg = computed(() => { //todo
+  return isStats.value ? '' : '';
 });
-const currentTasks = computed(() => {
-  return isTaskActive.value ? 'btn-nav current' : 'btn-nav';
+const resolveStatsLink = computed(() => {
+  return isStats.value ? 'btn-nav current' : 'btn-nav';
 })
-const currentStats = computed(() => {
-  return !isTaskActive.value ? 'btn-nav current' : 'btn-nav';
+const resolveTasksLink = computed(() => {
+  return isStats.value ? 'btn-nav' : 'btn-nav current';
 })
-
-const resolveStats = () => {
-  isTaskActive.value = false;
+const toggleStats = () => {
+  isStats.value = true;
   emitStatus();
 }
-const resolveTasks = () => {
-  isTaskActive.value = true;
+const toggleTasks = () => {
+  isStats.value = false;
   emitStatus();
 }
-
 const emitStatus = () => {
-  emit('status', isTaskActive.value);
+  emit('status', isStats.value);
 }
+
+onUpdated(() => {
+  isStats.value = props.showStats;
+})
 
 </script>
 
@@ -41,10 +46,10 @@ const emitStatus = () => {
       </div> 
       <div :class="isActive && 'items active' || 'items'">
         <div class="tasks">
-          <router-link @click="resolveTasks" :class="currentTasks" to="/">Tasks</router-link>
+          <router-link @click="toggleTasks" :class="resolveTasksLink" to="/">Tasks</router-link>
         </div>
         <div class="stats">
-          <router-link @click="resolveStats" :class="currentStats" to="/">Stats</router-link>
+          <router-link @click="toggleStats" :class="resolveStatsLink" to="/">Stats</router-link>
         </div>
         <div class="logout">
           <span>

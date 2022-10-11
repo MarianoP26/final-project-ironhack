@@ -90,6 +90,7 @@ const applyFilters = (filters) => {
   if (filters.completed === FILTER_OFF) result.sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   filteredTasksList.value = result;
 }
+
 const showTasks = (code, task) => {
   showStats.value = false;
   let result = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
@@ -102,10 +103,10 @@ const showTasks = (code, task) => {
   else if (code === MAX_TIME_TASK) filteredTasksList.value = [task];
   else if (code === MAX_PENDING_TIME_TASK) filteredTasksList.value = [task];
   else console.log('This should be never logged');
-  console.log(task);
 }
+
 const applyStatus = (isTask) => {
-  showStats.value = !isTask;
+  showStats.value = isTask;
 } 
 
 onMounted(() => {
@@ -117,7 +118,7 @@ onMounted(() => {
 <template>
   <div id="app">
     <div class="main">
-      <Nav @status="applyStatus"/>
+      <Nav @status="applyStatus" :showStats="showStats"/>
       <div v-if="showStats" class="stats">
         <UserStats :tasks="tasks" @showTasks="showTasks"/>
       </div>
