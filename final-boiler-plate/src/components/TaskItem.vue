@@ -7,6 +7,9 @@ const props = defineProps({
 
 const confirmDelete = ref(false);
 
+const IMGROUTE = ref('images/padlock.png');
+const IMGROUTE2 = ref('images/tick.png');
+
 const toggleConfirm = () => {
   if (!confirmDelete.value) confirmDelete.value = true;
   setTimeout(()=>{
@@ -94,7 +97,7 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
           <span v-if="task.is_complete">Completed {{completedToDate}} ago</span>
           <span v-if="task.is_complete">Time took {{timeTookToDate}}</span>
         </div>
-        <h1>{{task.title}} <span v-if="task.is_private"><img src="public/images/padlock.png"></span><span v-if="task.is_complete"><img src="images/tick.png" alt=""></span></h1>
+        <h1>{{task.title}} <span v-if="task.is_private"><img :src="IMGROUTE"></span><span v-if="task.is_complete"><img :src="IMGROUTE2" alt=""></span></h1>
         <p>{{task.notes}}</p>
       </div>
       <div class="toggle-wrapper">
