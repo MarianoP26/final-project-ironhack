@@ -120,7 +120,7 @@ const resetFilterSettings = () => {
         <input type="text" placeholder="Search by title..." v-model="filterStates.search" @keyup="emitFilters">
       </div>
       <div class="filters">
-        <button class="btn-reset" @click="resetFilterSettings">Reset filters</button>
+        <button class="btn-reset" @click="resetFilterSettings">Reset</button>
         <Button :class="filterStates.alpha && 'btn-on' || 'btn-off'" @click="nextAlpha(filterStates.alpha)"><img :src="alphaFilterState"></Button>
         <Button :class="filterStates.private && 'btn-on' || 'btn-off'" @click="nextPrivate(filterStates.private)"><img :src="privateFilterState"></Button>
         <Button :class="filterStates.time && 'btn-on' || 'btn-off'" @click="nextTime(filterStates.time)"><img :src="timeFilterState"></Button>
@@ -154,8 +154,6 @@ const resetFilterSettings = () => {
 }
 
 input {
-  position:relative;
-  left: 50%;
   height: 24px;
   font-size: 18px;
 }
@@ -165,11 +163,11 @@ input {
   text-align: center;
 }
 
-/* @media only screen and (max-width:1285px) { 
+@media only screen and (max-width:700px) { 
 	.container {
-    width: 800px;
+    justify-content: flex-start;
   }
-} */
+}
 
 
 

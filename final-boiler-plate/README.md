@@ -83,6 +83,7 @@ Created UserStats component mounted @Home.
 - @TaskItem remove "pending" text.  
 - If tasks is empty then show text to user > "Currently you have no tasks".  
 - Signout logic (forgot to do this before).  
+- Fix Bug -> when 0 tasks > stats page error.  
 
 ## Plan for before end of project  
 - Google signin method.  
