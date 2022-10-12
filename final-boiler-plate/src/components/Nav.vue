@@ -1,37 +1,43 @@
 <script setup>
 import { useUserStore } from "../stores/user";
 import { ref, computed, onUpdated } from 'vue';
+import { useRouter } from "vue-router";
 
 const emit = defineEmits(["status"]);
 const props = defineProps({
   showStats: Boolean,
 })
-
+const redirect = useRouter();
 const user = ref(useUserStore().user.email.split('@')[0]);
 const isActive = ref(false); //responsive related
 const isStats = ref(props.showStats);
-
-const signOutMsg = computed(() => { //todo
-  return isStats.value ? '' : '';
-});
+const slidePage = ref('Stats');
 const resolveStatsLink = computed(() => {
-  return isStats.value ? 'btn-nav current' : 'btn-nav';
+  return isStats.value ? 'element active' : 'element';
 })
 const resolveTasksLink = computed(() => {
-  return isStats.value ? 'btn-nav' : 'btn-nav current';
+  return isStats.value ? 'element' : 'element active';
 })
 const toggleStats = () => {
+  slidePage.value = 'Task';
   isStats.value = true;
   emitStatus();
 }
 const toggleTasks = () => {
+  slidePage.value = 'Stats';
   isStats.value = false;
   emitStatus();
 }
 const emitStatus = () => {
   emit('status', isStats.value);
 }
-
+const slideTo = () => {
+  isStats.value ? toggleTasks() : toggleStats();
+}
+async function signOut() {
+  await useUserStore().signOut();
+  redirect.push({ path: "/auth/login" });
+}
 onUpdated(() => {
   isStats.value = props.showStats;
 })
@@ -39,169 +45,178 @@ onUpdated(() => {
 </script>
 
 <template>
-  <nav class="main">
-    <div class="navbar">
-      <div class="title-container">
-        <h2>{{user}}!</h2>
-      </div> 
-      <div :class="isActive && 'items active' || 'items'">
-        <div class="tasks">
-          <router-link @click="toggleTasks" :class="resolveTasksLink" to="/">Tasks</router-link>
+  <main class="main">
+    <div class="container">
+      <div class="navbar">
+        <div class="logobg logosm"></div>
+        <div class="user">
+          <h3 class="username">{{user}}</h3>
+          <h4 class="signout" @click="signOut">Sign Out</h4>
         </div>
-        <div class="stats">
-          <router-link @click="toggleStats" :class="resolveStatsLink" to="/">Stats</router-link>
+
+        <ul :class="isActive && 'elements activer' || 'elements'">
+          <li><router-link @click="toggleTasks" :class="resolveTasksLink" to="/">Tasks</router-link></li>
+          <li><router-link @click="toggleStats" :class="resolveStatsLink" to="/">Stats</router-link></li>
+        </ul>
+
+        <div class="slide" @click="slideTo">
+          {{slidePage}}
         </div>
-        <div class="logout">
-          <span>
-            {{signOutMsg}}
-            <router-link class="btn-signout" to="/" @click="signOut">Sign Out</router-link>
-          </span>
-        </div>
-      </div>
-      <div :class="isActive && 'toggler rotate' || 'toggler'" @click="isActive = !isActive">
-        |||
+
       </div>
     </div>
-  </nav>
+  </main>
 </template>
 
 
 <style scoped>
 
-.main {
-  background-image: url('../assets/navback.png');
-  background-size: cover;
-  position: relative;
+.container {
+    width: 100%;
+    border-bottom: 1px solid black;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 
 .navbar {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0;
-  padding: 1rem;
-  height: 5rem;
-  z-index: 100;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.items {
-  display: flex;
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
 }
-.tasks,.stats,.logout {
+
+.navbar ul li .element {
+    text-decoration: none;
+    color: black;
+    font-family: Roboto, "sans-serif";
+    font-size: 36px;
+    letter-spacing: 2px;
+}
+
+.navbar ul li::before {
+    content: "";
+    height: 3px;
+    width: 0%;
+    background: rgb(255, 255, 255);
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    transition: 0.4s ease-out;
+}
+
+.signout:hover {
+    text-decoration: underline;
+    transition: .4s ease-out;
+    color: darkred;
+    transform: scale(1.1);
+}
+
+.active {
+  font-weight: 900;
+  transition: 0.4s ease-out;
+}
+
+.navbar ul li:hover::before {
+    width: 100%;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items : center;
+}
+
+.username {
+  font-size: 28px;
   letter-spacing: 2px;
-  transition: .3s;
-  margin: 0 25px;
 }
-.title-container {
-  margin-left: 20px;
-  z-index: 100;
+
+.signout {
+  letter-spacing: 2px;
+  font-size: 20px;
   cursor: pointer;
 }
 
-.title-container h2 {
-  align-self: center;
-  color: #eceff1;
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-right: 1rem;
-  letter-spacing: 2px;
-  transition: .5s;
+.logobg{
+  margin: 1rem;
+  width: 220px;
+  height: 227px;
+  background-image: url('../assets/logobgtest1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
 }
 
-.toggler {
-  color: #d1faf4;
-  margin-right: 20px;
-  font-size: 35px;
-  transform: rotate(90deg);
+.slide {
+  max-width:67.5px;
+  color: black;
+  text-decoration: none;
+  font-family: Roboto, "sans-serif";
+  font-size: 36px;
   cursor: pointer;
   transition: .3s;
   display: none;
 }
 
-.rotate {
-  transform: rotate(180deg);
+ul {
+  padding: 0;
 }
 
-.logout {
-  font-size: 1.4rem;
-}
-
-@media screen and (max-width: 800px){
-  .toggler {
+@media screen and (max-width: 973px){
+  .slide {
     display: inline-block;
   }
-  .items {
+
+  .slide:hover {
+    transform: scale(1.1);
+  }
+
+  .slide:hover::before {
+    width: 100%;
+  }
+
+  .slide::before {
+    content: "";
+    height: 3px;
+    width: 0%;
+    background: rgb(255, 255, 255);
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    transition: 0.4s ease-out;
+  }
+
+  .navbar ul li .element {
     padding-top: 1rem;
     padding-bottom: 1rem;
     position: absolute;
-    display: flex;
-    flex-direction: column;
     text-align: center;
     overflow: hidden;
-    align-items: center;
-    align-content: space-evenly;
-    gap: 3rem;
     z-index: 1;
     top: -100vh;
     width: 300px;
-    background-image: url('../assets/toggler.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 10%;
     border: 1px solid brown;
   }
 
-  .btn-header, .btn-stats {
-    color: darkgoldenrod;
+  ul {
+    display: none;
   }
 
-  .tasks,.stats,.logout {
-
-  }
-
-  .logout span {
-    
-  }
-
-  .active {
-    top: 4.9rem;
-    right: 0;
-  }
+  .logosm {
+    width: 38px;
+    height: 100px;
+    background-image: url('../assets/logosmalltest1.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
 }
-
-.btn-nav{
-  /* background-color: #455a64; */
-  border: none;
-  border-radius: 3px;
-  box-shadow: 0 0 0 0.5px rgba(49,49,93,.03),
-    0 2px 5px 0 rgba(49,49,93,.1),
-    0 1px 2px 0 rgba(0, 0, 0, .08);
-  color: rgb(248, 64, 64);
-  cursor: pointer;
-  text-decoration: none;
-  padding: 0.5rem;
-  margin: 0 0.5rem;
-  font-size: 1.5rem;
-  font-weight: 900;
-  transition: .5s;
-}
-.btn-nav:hover {
-  box-shadow: 0 0 0 4px #333, 0 0 0 6px #83ff3b;
-}
-
-.current {
-  box-shadow: 0 0 0 4px #333, 0 0 0 6px #83ff3b;
-  color:#83ff3b;
-}
-
-.btn-signout {
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 700;
-  color: darkred;
-  font-size: 1.4rem;
-  text-decoration: underline;
 }
 
 </style>

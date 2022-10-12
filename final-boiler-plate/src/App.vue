@@ -41,8 +41,8 @@ onMounted(async () => {
 body {
   margin: 0;
   padding: 0;
-  background-image: url('./assets/backg.png');
-  background-size: cover;
+  background-image: url('./assets/test.jpg');
+  background-size: contain;
   /* background: linear-gradient(120deg, #2980b9, #8e44ad); */
   /* overflow: hidden; */
 }

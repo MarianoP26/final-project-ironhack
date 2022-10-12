@@ -154,7 +154,7 @@ const redirect = (code, task) => {
     <div class="container">
       <div class="content">
         <div class="heading">
-          <h2>{{user}} Stats</h2>
+          <h2>Stats</h2>
         </div>
         <div v-if="tasks" class="body">
           <div class="box">

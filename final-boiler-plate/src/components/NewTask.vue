@@ -82,6 +82,10 @@ onUpdated(() => {
 <style scoped>
 .main {
   display: grid;
+  margin: 2rem auto;
+  width: 95%;
+  background:rgba(107, 57, 0, 0.26);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 6px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .header {
@@ -117,7 +121,7 @@ input {
 
 .submit {
   flex: 1 1 10ch;
-  background: hotpink;
+  background: rgb(117, 71, 1);
   color: white;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
