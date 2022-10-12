@@ -9,8 +9,9 @@
 <style scoped>
 
 footer {
-  /* position: sticky; */
-  bottom:0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   box-sizing: border-box;
   background-color: #cfd8dc;
   padding: 1rem;
