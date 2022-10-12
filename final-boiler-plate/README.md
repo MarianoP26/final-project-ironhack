@@ -84,6 +84,9 @@ Created UserStats component mounted @Home.
 - If tasks is empty then show text to user > "Currently you have no tasks".  
 - Signout logic (forgot to do this before).  
 - Fix Bug -> when 0 tasks > stats page error.  
+- Switch checkbox @NewTask to a padlock icon.  
+- Fix footer.  
+- NewTask style refactor.  
 
 ## Plan for before end of project  
 - Google signin method.  
