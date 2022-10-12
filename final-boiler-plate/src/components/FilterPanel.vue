@@ -135,7 +135,7 @@ const resetFilterSettings = () => {
   display: flex;
   flex-direction: row;
   margin: 0 auto;
-  width: 100%;
+  width: 87vw;
   height: 50px;
   text-align: center;
   background-color: rgb(119, 117, 117);
@@ -165,11 +165,11 @@ input {
   text-align: center;
 }
 
-@media only screen and (max-width:1285px) { 
+/* @media only screen and (max-width:1285px) { 
 	.container {
-    width: 635px;
+    width: 800px;
   }
-}
+} */
 
 
 
