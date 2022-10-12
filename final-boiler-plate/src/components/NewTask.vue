@@ -83,12 +83,13 @@ onUpdated(() => {
 .main {
   display: grid;
   margin: 2rem auto;
-  width: 95%;
+  width: 1435px;
   background:rgba(107, 57, 0, 0.26);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 6px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .header {
+  margin-top: 1rem;
   text-align: center;
   font-size: 3rem;
 }
@@ -128,5 +129,16 @@ input {
 
 .submit:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 1460px) {
+  .main {
+    width: 960px;
+  }
+}
+@media screen and (max-width: 977px) {
+  .main {
+    width: 92vw;
+  }
 }
 </style>

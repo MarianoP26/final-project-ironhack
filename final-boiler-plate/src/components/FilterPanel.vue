@@ -113,14 +113,12 @@ const resetFilterSettings = () => {
 <template>
   <div class="main">
     <div class="container">
-      <div class="toggler">
-        <Button class="btn" @click="nextCompleted(filterStates.completed)"><img :src="completedFilterState"></Button>
-      </div>
       <div class="searchbar">
         <input type="text" placeholder="Search by title..." v-model="filterStates.search" @keyup="emitFilters">
       </div>
       <div class="filters">
         <button class="btn-reset" @click="resetFilterSettings">Reset</button>
+        <Button class="btn" @click="nextCompleted(filterStates.completed)"><img :src="completedFilterState"></Button>
         <Button :class="filterStates.alpha && 'btn-on' || 'btn-off'" @click="nextAlpha(filterStates.alpha)"><img :src="alphaFilterState"></Button>
         <Button :class="filterStates.private && 'btn-on' || 'btn-off'" @click="nextPrivate(filterStates.private)"><img :src="privateFilterState"></Button>
         <Button :class="filterStates.time && 'btn-on' || 'btn-off'" @click="nextTime(filterStates.time)"><img :src="timeFilterState"></Button>
@@ -132,43 +130,67 @@ const resetFilterSettings = () => {
 
 <style scoped>
 .container {
+  width:1400px;
   display: flex;
   flex-direction: row;
-  margin: 0 auto;
-  width: 87vw;
-  height: 50px;
+  flex-wrap: wrap;
+  margin: 0.4rem auto 0;
   text-align: center;
-  background-color: rgb(119, 117, 117);
   align-items: center;
-  justify-content: space-between;
-  background-image: url('../assets/filterheader.png');
-  background-size: cover;
+  justify-content: space-evenly;
+  background:rgba(48, 27, 0, 0.74);
+  box-shadow: rgba(255, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  padding: 1rem;
+  gap: 1rem;
 }
 .toggler {
   margin: 1rem;
 }
 .filters {
-  margin: 1rem;
   display: flex;
   gap: 2rem;
 }
 
 input {
-  height: 24px;
-  font-size: 18px;
+  height: 28px;
+  font-size: 22px;
+  width: 50vw;
 }
 
 .btn-reset {
-  padding:0.6rem;
-  text-align: center;
+  margin-left: 1rem;
+	box-shadow:inset 0px 1px 0px 0px #a37338;
+	background:linear-gradient(to bottom, #a3651a 5%, #834b02 100%);
+	background-color:#462701;
+	border-radius:6px;
+	border:1px solid #806a45;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffa412;
+}
+.btn-reset:hover {
+	background:linear-gradient(to bottom, #553000 5%, #a3651a 100%);
+	background-color:#3b2200;
+}
+.btn-reset:active {
+	position:relative;
+	top:1px;
 }
 
-@media only screen and (max-width:700px) { 
-	.container {
-    justify-content: flex-start;
+@media screen and (max-width: 1460px) {
+  .container {
+    width: 920px;
   }
 }
-
-
-
+@media screen and (max-width: 977px) {
+  .container {
+    width: 88vw;
+  }
+}
 </style>

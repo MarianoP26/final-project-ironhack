@@ -6,7 +6,7 @@ import TaskItem from '../components/TaskItem.vue';
 import FilterPanel from '../components/FilterPanel.vue';
 import UserStats from '../components/UserStats.vue';
 import { useTaskStore } from "../stores/task.js";
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 //Filters consts
 const FILTER_OFF = 0;
@@ -29,6 +29,7 @@ const taskToEdit = ref();
 const flag = ref(false);  //edit flag
 const isFilterActive = ref(false);
 const showStats = ref(false);
+const showFilters = ref(false);
 
 const fetchTasks = async () => {
   tasks.value = await taskStore.fetchTasks();
@@ -108,6 +109,12 @@ const showTasks = (code, task) => {
 const applyStatus = (isTask) => {
   showStats.value = isTask;
 } 
+const toggleFilters = () => {
+  showFilters.value = !showFilters.value;
+} 
+const filterButtonText = computed(() => {
+  return showFilters.value ? 'Hide Filters' : 'Show Filters';
+})
 
 onMounted(() => {
   fetchTasks();
@@ -127,9 +134,14 @@ onMounted(() => {
         <div class="container">
           <div class="tasks">
             <div class="task-list-header">
-              <FilterPanel @sendFilters="applyFilters"/>
+              <button @click="toggleFilters" class="btn-filters">{{filterButtonText}}</button>
+              <Transition name="slide-fade">
+                <FilterPanel v-if="showFilters" @sendFilters="applyFilters"/>
+              </Transition>
             </div>
-            <TaskItem v-for="task, index in filteredTasksList" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
+            <TransitionGroup name="slide-fade">
+              <TaskItem v-for="task, index in filteredTasksList" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
+            </TransitionGroup>
           </div>
         </div>
       </div>
@@ -150,6 +162,48 @@ onMounted(() => {
   gap: 0.3rem;
 }
 
+.task-list-header {
+  width: 100vw;
+  text-align: center;
+}
+
+.btn-filters {
+	box-shadow:inset 0px 1px 0px 0px #a6827e;
+	background:linear-gradient(to bottom, #7d5d3b 5%, #634b30 100%);
+	background-color:#7d5d3b;
+	border-radius:3px;
+	border:1px solid #54381e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:28px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #4d3534;
+}
+.btn-filters:hover {
+	background:linear-gradient(to bottom, #634b30 5%, #7d5d3b 100%);
+	background-color:#634b30;
+}
+.btn-filters:active {
+	position:relative;
+	top:1px;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+} 
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-5px);
+  opacity: 0;
+}
 
 
 </style>

@@ -134,13 +134,13 @@ onUpdated(() => {
 }
 
 .username {
-  font-size: 28px;
+  font-size: 44px;
   letter-spacing: 2px;
 }
 
 .signout {
   letter-spacing: 2px;
-  font-size: 20px;
+  font-size: 28px;
   cursor: pointer;
 }
 
@@ -169,7 +169,7 @@ ul {
   padding: 0;
 }
 
-@media screen and (max-width: 973px){
+@media screen and (max-width: 1020px){
   .slide {
     display: inline-block;
   }
@@ -180,6 +180,11 @@ ul {
 
   .slide:hover::before {
     width: 100%;
+  }
+
+  .username {
+    font-size: 28px;
+    letter-spacing: 2px;
   }
 
   .slide::before {
