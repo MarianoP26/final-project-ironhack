@@ -134,7 +134,8 @@ const resetFilterSettings = () => {
 .container {
   display: flex;
   flex-direction: row;
-  width: 1270px;
+  margin: 0 auto;
+  width: 100%;
   height: 50px;
   text-align: center;
   background-color: rgb(119, 117, 117);

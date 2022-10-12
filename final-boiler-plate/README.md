@@ -82,6 +82,7 @@ Created UserStats component mounted @Home.
 - @TaskItem if timestamp = (0 minutes ago) then > "Just now" || "Less than a minute".  
 - @TaskItem remove "pending" text.  
 - If tasks is empty then show text to user > "Currently you have no tasks".  
+- Signout logic (forgot to do this before).  
 
 ## Plan for before end of project  
 - Google signin method.  

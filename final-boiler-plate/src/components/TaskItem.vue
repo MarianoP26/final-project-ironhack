@@ -124,9 +124,17 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
   align-items: center;
   justify-content:center;
   text-align: center;
-  width: 554px;
+  width: 400px;
   height: 298px;
 }
+
+@media only screen and (max-width:660) { 
+	.container {
+    width: 400px;
+    color:red;
+  }
+}
+
 
 .banner-image {
   display: flex;
