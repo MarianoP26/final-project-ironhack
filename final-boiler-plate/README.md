@@ -71,22 +71,20 @@ Created UserStats component mounted @Home.
 - @UserStats redirects to @Home with filters applied based on stat clicked to show @TaskItems meeting the criteria.  
 - Added new filters @UserStats.  
 
-## Day 7 Plans:
-- Create Tooltip component.  
-- Burger menu on filter panel for smaller devices.  
-- Swap placeholders icons / text styles.  
-- Improve general responsiveness in all components.  
-- Change / configure backgrounds images and stylings.  
-- Basically, improve in general the UI/UX.  
-- Add Logo Title @Signin & @Signup.  
-- @TaskItem if timestamp = (0 minutes ago) then > "Just now" || "Less than a minute".  
-- @TaskItem remove "pending" text.  
-- If tasks is empty then show text to user > "Currently you have no tasks".  
-- Signout logic (forgot to do this before).  
-- Fix Bug -> when 0 tasks > stats page error.  
-- Switch checkbox @NewTask to a padlock icon.  
-- Fix footer.  
-- NewTask style refactor.  
+## Day 7:
+- Changed placeholders icons / text styles to build version ones.  
+- Improved general responsiveness in almost all components.  
+- Changed backgrounds images and stylings.  
+- Basically, improved in general the UI/UX.  
+- Signout logic.  
 
 ## Plan for before end of project  
+- Add Logo Title @Signin & @Signup.  
+- Create Tooltip component.  
+- Fix Bug -> when 0 tasks > stats page error.  
 - Google signin method.  
+- @TaskItem if timestamp = (0 minutes ago) then > "Just now" || "Less than a minute".  
+- If tasks is empty then show text to user > "Currently you have no tasks".  
+- Switch checkbox @NewTask to a padlock icon.  
+- Fix footer.  
+- At @NewTask & @Home when edit mode > improve UX

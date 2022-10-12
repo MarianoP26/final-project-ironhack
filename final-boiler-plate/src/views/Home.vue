@@ -169,8 +169,7 @@ onMounted(() => {
 
 .btn-filters {
 	box-shadow:inset 0px 1px 0px 0px #a6827e;
-	background:linear-gradient(to bottom, #7d5d3b 5%, #634b30 100%);
-	background-color:#7d5d3b;
+	background-color:#7d5d3ba8;
 	border-radius:3px;
 	border:1px solid #54381e;
 	display:inline-block;
@@ -184,7 +183,7 @@ onMounted(() => {
 }
 .btn-filters:hover {
 	background:linear-gradient(to bottom, #634b30 5%, #7d5d3b 100%);
-	background-color:#634b30;
+	background-color:#634b30a8;
 }
 .btn-filters:active {
 	position:relative;
