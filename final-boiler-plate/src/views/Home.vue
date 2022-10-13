@@ -128,7 +128,7 @@ onMounted(() => {
       <div v-else class="todo-app">
         <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" @cancelEdit="cancelEdit" :flag="flag"/>
         <div class="container">
-          <div class="tasks" id="tasklist">
+          <div class="tasks" id="tasklist" v-if="tasks.length > 0">
             <div class="task-list-header">
               <button @click="toggleFilters" class="btn-filters">{{filterButtonText}}</button>
               <Transition name="slide-fade">
@@ -139,6 +139,9 @@ onMounted(() => {
               <TaskItem v-for="task, index in filteredTasksList" :key="index" :task="task" @toggleTask="toggleTask" @deleteTask="deleteTask" @editTask="editTask"/>
             </TransitionGroup>
           </div>
+          <div class="no-tasks" v-else>
+            <h3>There are no tasks as of this moment</h3>
+          </div>
         </div>
       </div>
       <Footer/>
@@ -148,6 +151,10 @@ onMounted(() => {
 
 <style scoped>
 
+.app {
+  position: relative;
+}
+
 .tasks {
   margin-top:0.3rem;
   display: flex;
@@ -156,6 +163,10 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
+}
+
+.no-tasks h3 {
+  text-align: center;
 }
 
 .task-list-header {

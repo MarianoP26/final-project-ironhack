@@ -9,15 +9,15 @@
 <style scoped>
 
 footer {
-  bottom: 0;
-  right: 0;
-  left: 0;
   box-sizing: border-box;
   background-color: #cfd8dc;
   padding: 1rem;
   width: 100%;
   font-size: 1rem;
   text-align: center;
+  position: absolute;
+  bottom: 0;
+  display: none;
 }
 
 a{

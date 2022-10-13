@@ -111,10 +111,12 @@ watch(props, (value) => {
   background:rgba(107, 57, 0, 0.26);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 6px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   font-family: cursive;
+  transition: .3s ease-in;
 }
 
 .main-edit {
-  border: 1px solid yellow;
+  border: 1px solid rgb(253, 255, 106);
+  transition: .3s ease-in;
 }
 
 .header {
@@ -124,7 +126,7 @@ watch(props, (value) => {
 }
 
 .header-edit {
-  color: yellow;
+  color:rgb(253, 255, 106);
 }
 
 form {
@@ -188,11 +190,13 @@ input {
 @media screen and (max-width: 1460px) {
   .mainy {
     width: 960px;
+    transition: .3s ease-in;
   }
 }
 @media screen and (max-width: 977px) {
   .mainy {
     width: 92vw;
+    transition: .3s ease-in;
   }
 }
 </style>

@@ -131,6 +131,7 @@ watch(props, (value) => {
   display: flex;
   flex-direction: column;
   align-items : center;
+  margin: 0 auto;
 }
 
 .username {
@@ -152,6 +153,7 @@ watch(props, (value) => {
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+  transition: .3s ease-in;
 }
 
 .slide {
@@ -221,6 +223,7 @@ ul {
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
+    transition: .3s ease-in;
 }
 }
 

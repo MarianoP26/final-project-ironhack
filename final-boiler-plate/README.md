@@ -88,10 +88,10 @@ Created UserStats component mounted @Home.
 - Now editMode at @NewTask is cancelable.  
 - Replaced onUpdate method to watch instead @Navbar.  
 - Clean a bit the code.  
+- Now a message appears if there no tasks to show.  
+- Now if the time shown in @TaskItem is less than 1 minute it will say 'less than a minute'.  
 
 ## Ending plans  
 - Add Logo Title @Signin & @Signup.  
 - Create Tooltip component.  
-- @TaskItem if timestamp = (0 minutes ago) then > "Just now" || "Less than a minute".  
-- If tasks is empty then show text to user > "Currently you have no tasks".  
 - Switch checkbox @NewTask to a padlock icon.  
