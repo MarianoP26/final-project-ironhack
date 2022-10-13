@@ -63,6 +63,7 @@ const toTimeCompare = (timestamp) => { // Compares passed timestamp to current d
   }
   result += (minutes === 0 || hours === 1 ) ? `${minutes} minutes` : `${minutes} minutes`;
 
+  if(result === '0 minutes') result = 'less than a minute';
   return result;
 }
 const toTime = (timestamp) => { // Just a translator from Milliseconds to Days Hours Minutes

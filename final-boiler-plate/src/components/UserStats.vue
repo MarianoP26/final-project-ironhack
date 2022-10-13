@@ -10,8 +10,8 @@ const emit = defineEmits(["showTasks"]);
 
 const user = ref(useUserStore().user.email.split('@')[0]);
 const maxPendingTimeTaskItem = ref();
-const minCompletedTimeTaskItem = ref(); //todo
-const maxCompletedTimeTaskItem = ref(); //todo
+const minCompletedTimeTaskItem = ref();
+const maxCompletedTimeTaskItem = ref();
 
 const completedTasks = computed(() => {
   return props.tasks.filter((task) => task.is_complete).length;
@@ -142,11 +142,9 @@ const timestampToRenderString = (timestamp) => { // Compares passed timestamp to
 
   return result;
 }
-
 const redirect = (code, task) => {
   emit("showTasks", code, task);
 }
-
 </script>
 
 <template>

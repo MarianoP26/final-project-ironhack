@@ -128,7 +128,7 @@ onMounted(() => {
       <div v-else class="todo-app">
         <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" @cancelEdit="cancelEdit" :flag="flag"/>
         <div class="container">
-          <div class="tasks">
+          <div class="tasks" id="tasklist">
             <div class="task-list-header">
               <button @click="toggleFilters" class="btn-filters">{{filterButtonText}}</button>
               <Transition name="slide-fade">

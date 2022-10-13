@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from "../stores/user";
-import { ref, computed, onUpdated } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRouter } from "vue-router";
 
 const emit = defineEmits(["status"]);
@@ -11,7 +11,9 @@ const redirect = useRouter();
 const user = ref(useUserStore().user.email.split('@')[0]);
 const isActive = ref(false); //responsive related
 const isStats = ref(props.showStats);
-const slidePage = ref('Stats');
+const slidePage = computed(() => {
+  return isStats.value ? 'Task' : 'Stats';
+})
 const resolveStatsLink = computed(() => {
   return isStats.value ? 'element active' : 'element';
 })
@@ -19,12 +21,10 @@ const resolveTasksLink = computed(() => {
   return isStats.value ? 'element' : 'element active';
 })
 const toggleStats = () => {
-  slidePage.value = 'Task';
   isStats.value = true;
   emitStatus();
 }
 const toggleTasks = () => {
-  slidePage.value = 'Stats';
   isStats.value = false;
   emitStatus();
 }
@@ -38,7 +38,7 @@ async function signOut() {
   await useUserStore().signOut();
   redirect.push({ path: "/auth/login" });
 }
-onUpdated(() => {
+watch(props, (value) => {
   isStats.value = props.showStats;
 })
 

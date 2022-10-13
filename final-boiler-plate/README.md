@@ -85,6 +85,9 @@ Created UserStats component mounted @Home.
 - @NewTask component now also shows @TaskItem component when editMode is active.  
 - Minor tweaks to styles @NewTask @TaskItem to improve UX.  
 - Refactor onUpdate methods to watch methods to improve performance and clean code.  
+- Now editMode at @NewTask is cancelable.  
+- Replaced onUpdate method to watch instead @Navbar.  
+- Clean a bit the code.  
 
 ## Ending plans  
 - Add Logo Title @Signin & @Signup.  
