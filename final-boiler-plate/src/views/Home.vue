@@ -40,29 +40,28 @@ const addNewTask = async (task) => {
   await taskStore.addTask(task);
   fetchTasks();
 }
-
 const toggleTask = async (id, bool) => {
   await taskStore.toggleCompleteTask(id, bool);
   fetchTasks();
 }
-
 const editTask = (task) => {
   taskToEdit.value = task;
   flag.value = true;
 }
-
+const cancelEdit = () => {
+  taskToEdit.value = {};
+  flag.value = false;
+}
 const updateTask = async (task) => {
   await taskStore.editTask(task);
   fetchTasks();
   taskToEdit.value = ref();
   flag.value = false;
 }
-
 const deleteTask = async (id) => {
   await taskStore.deleteTask(id);
   fetchTasks();
 }
-
 const applyFilters = (filters) => {
   let result = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   if (filters.completed !== FILTER_OFF) {   //Toggles between only completed / only no completed
@@ -91,7 +90,6 @@ const applyFilters = (filters) => {
   if (filters.completed === FILTER_OFF) result.sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
   filteredTasksList.value = result;
 }
-
 const showTasks = (code, task) => {
   showStats.value = false;
   let result = [...tasks.value].sort((a, b) => Number(a.is_complete) - Number(b.is_complete));
@@ -105,7 +103,6 @@ const showTasks = (code, task) => {
   else if (code === MAX_PENDING_TIME_TASK) filteredTasksList.value = [task];
   else console.log('This should be never logged');
 }
-
 const applyStatus = (isTask) => {
   showStats.value = isTask;
 } 
@@ -115,7 +112,6 @@ const toggleFilters = () => {
 const filterButtonText = computed(() => {
   return showFilters.value ? 'Hide Filters' : 'Show Filters';
 })
-
 onMounted(() => {
   fetchTasks();
 })
@@ -130,7 +126,7 @@ onMounted(() => {
         <UserStats :tasks="tasks" @showTasks="showTasks"/>
       </div>
       <div v-else class="todo-app">
-        <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" :flag="flag"/>
+        <NewTask @addTask="addNewTask" :task="taskToEdit" @updateTask="updateTask" @cancelEdit="cancelEdit" :flag="flag"/>
         <div class="container">
           <div class="tasks">
             <div class="task-list-header">

@@ -2,7 +2,7 @@
 import { ref, computed, defineProps, onUpdated, watch } from "vue";
 import TaskItem from './TaskItem.vue';
 
-const emit = defineEmits(["addTask", "updateTask"]);
+const emit = defineEmits(["addTask", "updateTask","cancelEdit"]);
 const props = defineProps({
   task: Object,
   flag: Boolean,
@@ -28,7 +28,6 @@ const heading = computed(() => {
 const submit = computed(() => {
   return !props.flag ? 'Add Task' : 'Edit Task';
 });
-
 function validate() {
   if (!taskData.value.title) {
     console.log("error");
@@ -46,6 +45,11 @@ function validate() {
     }
   }
 }
+const cancelEdit = () => {
+  resetData();
+  isEditing.value = false;
+  emit('cancelEdit');
+}
 const resetData = () => {
   taskData.value = {
     title: "",
@@ -54,7 +58,10 @@ const resetData = () => {
   };
 }
 watch(props, (value) => {
-  if (props.task) taskData.value = props.task;
+  if (props.task) {
+    taskData.value = props.task;
+    isEditing.value = false;
+  }
 })
 watch(props, (value) => {
   if (props.flag && !isEditing.value) {
@@ -71,7 +78,7 @@ watch(props, (value) => {
 <template>
   <div :class="mainClass">
     <div :class="headerClass">
-      {{ heading }}
+      {{ heading }} <span class="cancel-edit" v-if="flag" @click="cancelEdit">cancel</span>
     </div>
     <form @submit.prevent="validate">
       <input
@@ -125,6 +132,23 @@ form {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.cancel-edit {
+  display: block;
+  color: darkred;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.082) ;
+  text-align: center;
+  margin: 0 auto;
+  width: 70px;
+  transition: .3s ease-out;
+}
+.cancel-edit:hover {
+  transform: scale(1.1);
+  text-decoration: underline;
+  transition: .3s ease-out;
 }
 
 .taskname {

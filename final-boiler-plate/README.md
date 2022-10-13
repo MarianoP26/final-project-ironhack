@@ -78,14 +78,17 @@ Created UserStats component mounted @Home.
 - Basically, improved in general the UI/UX.  
 - Signout logic.  
 
-## Plan for before end of project  
+## Day 8:
+- Body background image now tileable.  
+- Minor fixes @Navbar on responsiveness.  
+- Now when entering editMode will scroll into view to @NewTask and put focus on input.  
+- @NewTask component now also shows @TaskItem component when editMode is active.  
+- Minor tweaks to styles @NewTask @TaskItem to improve UX.  
+- Refactor onUpdate methods to watch methods to improve performance and clean code.  
+
+## Ending plans  
 - Add Logo Title @Signin & @Signup.  
 - Create Tooltip component.  
-- Fix Bug -> when 0 tasks > stats page error.  
-- Google signin method.  
 - @TaskItem if timestamp = (0 minutes ago) then > "Just now" || "Less than a minute".  
 - If tasks is empty then show text to user > "Currently you have no tasks".  
 - Switch checkbox @NewTask to a padlock icon.  
-- Fix footer.  
-- At @NewTask & @Home when edit mode > improve UX
-- @Signin @Signout recolors.  
