@@ -23,7 +23,6 @@ footer {
 a{
   text-decoration: none;
   color: #546e7a;
-  font-family:cursive;
 }
 
 </style>

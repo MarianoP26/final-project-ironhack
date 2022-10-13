@@ -6,27 +6,21 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
 
-// Route Variables
 const route = "/auth/sign-up";
 const buttonText = "Sign Up instead";
 
-// Input Fields
 const email = ref("");
 const password = ref("");
 
-// Error Message
 const errorMsg = ref("");
 
-//Show hide password variables
 const passwordFieldType = computed(() =>
   hidePassword.value ? "password" : "text"
 );
 const hidePassword = ref(true);
 
-// Router to push user once SignedIn to the HomeView
 const redirect = useRouter();
 
-// Arrow function to Signin user to supaBase
 const signIn = async () => {
   try {
     // calls the user store and send the users info to backend to logIn
@@ -46,6 +40,7 @@ const signIn = async () => {
 
 <template>
   <div class="main">
+    <div class="logo"></div>
     <h1>Sign In</h1>
     <p v-if="errorMsg" class="">
       {{ errorMsg }}
@@ -90,13 +85,24 @@ const signIn = async () => {
 
 <style scoped>
 
+.logo {
+  position: absolute;
+  background-image: url('../assets/logohorizontal.png');
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 100%;
+  top: 20%;
+  left: 50%;
+  transform: translate(-35%, -50%);
+}
+
 .main {
  position: absolute;
  top: 50%;
  left: 50%;
  transform: translate(-50%, -50%);
  width: 400px;
- background: white;
+ background: rgba(54, 33, 0, 0.521);
  border-radius: 10px;
 }
 
@@ -162,6 +168,7 @@ form .text-field {
 }
 
 p {
+  font-family: cursive;
   text-align: center;
   margin: 30px 0;
   font-size: 16px;
@@ -187,12 +194,12 @@ p span {
   width: 100%;
   height: 50px;
   border: 1px solid;
-  background: #2691d9;
+  background: #2c120048;
   border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  cursor: pointer;
+  font-size: 28px;
+  color: #ffffff;
   outline: none;
+  cursor: pointer;
 }
 
 .btn-sign-in:hover {
@@ -206,7 +213,7 @@ p span {
   margin: 1rem 0;
 }
 .input {
-  color: black;
+  color: rgb(0, 0, 0);
   margin-bottom: 1rem;
 }
 .button {

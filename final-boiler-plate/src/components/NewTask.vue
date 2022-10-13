@@ -110,7 +110,6 @@ watch(props, (value) => {
   width: 1435px;
   background:rgba(107, 57, 0, 0.26);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 6px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  font-family: cursive;
   transition: .3s ease-in;
 }
 
@@ -137,6 +136,7 @@ form {
 }
 
 .cancel-edit {
+  font-family: cursive;
   display: block;
   color: darkred;
   font-size: 16px;
@@ -166,6 +166,7 @@ form {
 }
 
 input {
+  font-family: cursive;
   border: none;
   background: hsl(0, 0%, 93%);
   border-radius: 0.25rem;
@@ -177,6 +178,7 @@ input {
 }
 
 .submit {
+  font-family: cursive;
   flex: 1 1 10ch;
   background: rgb(117, 71, 1);
   color: white;

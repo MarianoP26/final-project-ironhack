@@ -12,13 +12,11 @@ const { user } = storeToRefs(userStore);
 onMounted(async () => {
   const appReady = ref(null);
   try {
-    await userStore.fetchUser(); // here we call fetch user
+    await userStore.fetchUser();
     if (!user.value) {
-      // redirect them to logout if the user is not there
       appReady.value = true;
       router.push({ path: "/auth/login" });
     } else {
-      // continue to dashboard
       router.push({ path: "/" });
     }
   } catch (e) {
@@ -41,8 +39,18 @@ onMounted(async () => {
 body {
   margin: 0;
   padding: 0;
-  background-image: url('./assets/backtile1.jpg');
-  font-family: cursive;
+  font-family: 'Gabriola', cursive;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+#app {
+  background-image: url('./assets/theme.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 </style>

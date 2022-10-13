@@ -15,4 +15,9 @@
 .btn-off {
   filter:opacity(30%);
 }
+
+.main {
+  width:32px;
+  height:32px;
+}
 </style>

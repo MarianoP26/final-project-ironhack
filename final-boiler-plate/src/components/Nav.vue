@@ -45,7 +45,7 @@ watch(props, (value) => {
 </script>
 
 <template>
-  <main class="main">
+  <div class="main">
     <div class="container">
       <div class="navbar">
         <div class="logobg logosm"></div>
@@ -65,7 +65,7 @@ watch(props, (value) => {
 
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 
@@ -95,7 +95,6 @@ watch(props, (value) => {
 .navbar ul li .element {
     text-decoration: none;
     color: black;
-    font-family: cursive, "sans-serif";
     font-size: 36px;
     letter-spacing: 2px;
 }
@@ -160,7 +159,6 @@ watch(props, (value) => {
   max-width:67.5px;
   color: black;
   text-decoration: none;
-  font-family: cursive, "sans-serif";
   font-size: 36px;
   cursor: pointer;
   transition: .3s;

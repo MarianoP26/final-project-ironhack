@@ -123,7 +123,7 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
   filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125));
   border: 1px solid rgba(255, 255, 255, 0.125);  
   border-radius: 12px;
-
+  font-family: cursive;
   padding: 38px;  
   display: flex;
   flex-direction: column;
@@ -160,7 +160,6 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
 }
 
 h1{
-  font-family: cursive, sans-serif;
   color: rgba(255,255,255,0.98);
   text-transform: uppercase;
   font-size: 2.4rem;
@@ -168,7 +167,6 @@ h1{
 
 p {
   color: #fff;
-  font-family: cursive, sans-serif;
   text-align: center;
   font-size: 0.8rem;
   line-height: 150%;

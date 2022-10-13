@@ -151,8 +151,8 @@ onMounted(() => {
 
 <style scoped>
 
-.app {
-  position: relative;
+.main {
+  background-image: url('../assets/backtile1.jpg');
 }
 
 .tasks {
@@ -175,6 +175,7 @@ onMounted(() => {
 }
 
 .btn-filters {
+  font-family: 'Gabriola';
 	box-shadow:inset 0px 1px 0px 0px #a6827e;
 	background-color:#7d5d3ba8;
 	border-radius:3px;
@@ -182,7 +183,6 @@ onMounted(() => {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:cursive;
 	font-size:28px;
 	padding:6px 24px;
 	text-decoration:none;

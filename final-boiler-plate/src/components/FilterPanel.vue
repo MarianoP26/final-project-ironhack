@@ -152,27 +152,17 @@ const resetFilterSettings = () => {
 }
 
 input {
+  font-family: cursive;
   height: 28px;
   font-size: 22px;
   width: 50vw;
 }
 
 .btn-reset {
-  margin-left: 1rem;
-	box-shadow:inset 0px 1px 0px 0px #a37338;
-	background:linear-gradient(to bottom, #a3651a 5%, #834b02 100%);
-	background-color:#462701;
-	border-radius:6px;
-	border:1px solid #806a45;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:cursive;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffa412;
+  font-family: cursive;
+  background: rgb(117, 71, 1);
+  color: white;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 .btn-reset:hover {
 	background:linear-gradient(to bottom, #553000 5%, #a3651a 100%);
