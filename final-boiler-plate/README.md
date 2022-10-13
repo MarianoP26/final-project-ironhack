@@ -88,3 +88,4 @@ Created UserStats component mounted @Home.
 - Switch checkbox @NewTask to a padlock icon.  
 - Fix footer.  
 - At @NewTask & @Home when edit mode > improve UX
+- @Signin @Signout recolors.  

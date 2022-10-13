@@ -167,7 +167,7 @@ input {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
+	font-family:cursive;
 	font-size:15px;
 	font-weight:bold;
 	padding:6px 24px;

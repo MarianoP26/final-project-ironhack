@@ -95,7 +95,7 @@ onUpdated(() => {
 .navbar ul li .element {
     text-decoration: none;
     color: black;
-    font-family: Roboto, "sans-serif";
+    font-family: cursive, "sans-serif";
     font-size: 36px;
     letter-spacing: 2px;
 }
@@ -158,7 +158,7 @@ onUpdated(() => {
   max-width:67.5px;
   color: black;
   text-decoration: none;
-  font-family: Roboto, "sans-serif";
+  font-family: cursive, "sans-serif";
   font-size: 36px;
   cursor: pointer;
   transition: .3s;
@@ -169,7 +169,7 @@ ul {
   padding: 0;
 }
 
-@media screen and (max-width: 1020px){
+@media screen and (max-width: 1105px){
   .slide {
     display: inline-block;
   }

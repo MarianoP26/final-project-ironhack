@@ -175,7 +175,7 @@ onMounted(() => {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
+	font-family:cursive;
 	font-size:28px;
 	padding:6px 24px;
 	text-decoration:none;

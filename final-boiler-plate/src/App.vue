@@ -41,11 +41,18 @@ onMounted(async () => {
 body {
   margin: 0;
   padding: 0;
-  background-image: url('./assets/test.jpg');
-  background-size: contain;
+  background-image: url('./assets/backtile1.jpg');
+  font-family: cursive;
   /* background: linear-gradient(120deg, #2980b9, #8e44ad); */
   /* overflow: hidden; */
 }
+
+/* @media screen and (max-width: 1460px) {
+  body {
+    background-size: contain;
+  }
+} */
+
 
 .route-enter-from {
   opacity: 0;

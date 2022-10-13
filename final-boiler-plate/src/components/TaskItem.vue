@@ -3,6 +3,7 @@ import {defineProps, computed, ref} from 'vue';
 
 const props = defineProps({
   task: Object,
+  editMode: Boolean,
 })
 
 const confirmDelete = ref(false);
@@ -90,7 +91,7 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
 
 <template>
   <div class="main">
-    <div :class="task.is_complete && 'container finished' || 'container'">
+    <div :class="task.is_complete && !editMode && 'container finished' || !task.is_complete && editMode && 'container container-shrink' || 'container'">
       <div class="wrapper">
         <div class="banner-image">
           <span>Created {{timeCreated}} ago</span>
@@ -100,10 +101,10 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
         <h1>{{task.title}} <span v-if="task.is_private"><img :src="IMGROUTE"></span><span v-if="task.is_complete"><img :src="IMGROUTE2" alt=""></span></h1>
         <p>{{task.notes}}</p>
       </div>
-      <div class="toggle-wrapper">
+      <div class="toggle-wrapper" v-if="!editMode">
         <button :class="toggle" @click="$emit('toggleTask', task.id, !task.is_complete)">{{toggleTextButton}}</button>
-        <button class="btn" @click="$emit('editTask', task)">Edit</button>
-        <button class="btn delete" @click="toggleConfirm" @dblclick="$emit('deleteTask', task.id)">{{textDeleteButton}}</button>
+        <button v-if="!task.is_complete" class="btn" @click="$emit('editTask', task)">Edit</button>
+        <button v-if="!task.is_complete" class="btn delete" @click="toggleConfirm" @dblclick="$emit('deleteTask', task.id)">{{textDeleteButton}}</button>
       </div>
     </div>
   </div>
@@ -118,10 +119,11 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(17, 25, 40, 0.25);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.125);  
-  padding: 38px;  
   filter: drop-shadow(0 30px 10px rgba(0,0,0,0.125));
+  border: 1px solid rgba(255, 255, 255, 0.125);  
+  border-radius: 12px;
+
+  padding: 38px;  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,14 +133,17 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
   height: 298px;
 }
 
+.container-shrink {
+  width: 350px;
+  height: 200px;
+}
+
 @media only screen and (max-width:660) { 
 	.container {
     width: 400px;
     color:red;
   }
 }
-
-
 .banner-image {
   display: flex;
   flex-direction: column;
@@ -154,7 +159,7 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
 }
 
 h1{
-  font-family: 'Righteous', sans-serif;
+  font-family: cursive, sans-serif;
   color: rgba(255,255,255,0.98);
   text-transform: uppercase;
   font-size: 2.4rem;
@@ -162,7 +167,7 @@ h1{
 
 p {
   color: #fff;
-  font-family: 'Lato', sans-serif;
+  font-family: cursive, sans-serif;
   text-align: center;
   font-size: 0.8rem;
   line-height: 150%;
@@ -176,6 +181,7 @@ p {
 
 .btn {
   border: none;
+  background: rgb(209, 211, 69);
   padding: 12px 24px;
   border-radius: 24px;
   font-size: 12px;
@@ -190,8 +196,8 @@ p {
 
 .undone {
   background: transparent;
-  color: rgba(0, 212, 255, 0.9);
-  border: 1px solid rgba(0, 212, 255, 0.6);
+  color: rgba(146, 96, 63, 0.9);
+  border: 1px solid rgba(146, 96, 63, 0.9);
   transition: all .3s ease;
   
 }
@@ -204,7 +210,7 @@ p {
 }
 
 .done {
-  background: rgba(0, 212, 255, 0.9);
+  background: rgba(146, 96, 63, 0.9);
   color: rgba(255,255,255,0.95);
   filter: drop-shadow(0);
   font-weight: bold;
@@ -219,7 +225,7 @@ p {
 }
 
 .delete {
-  background: rgba(255, 30, 0, 0.9);
+  background: rgba(156, 35, 18, 0.9);
   color: rgba(255,255,255,0.95);
   filter: drop-shadow(0);
   font-weight: bold;

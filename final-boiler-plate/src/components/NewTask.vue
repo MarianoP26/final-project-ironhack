@@ -1,5 +1,6 @@
 <script setup>
-import { ref, computed, defineProps, onUpdated } from "vue";
+import { ref, computed, defineProps, onUpdated, watch } from "vue";
+import TaskItem from './TaskItem.vue';
 
 const emit = defineEmits(["addTask", "updateTask"]);
 const props = defineProps({
@@ -13,7 +14,14 @@ let taskData = ref({
 });
 
 const isError = ref(false);
+const isEditing = ref(false);
 
+const mainClass = computed(() => {
+  return props.flag ? 'mainy main-edit' : 'mainy'; 
+})
+const headerClass = computed(() => {
+  return props.flag ? 'header header-edit' : 'header'; 
+})
 const heading = computed(() => {
   return !props.flag ? 'New Task' : 'Edit Task';
 });
@@ -31,37 +39,43 @@ function validate() {
   } else {
     if (!props.flag) {
       emit("addTask", taskData.value);
-      taskData.value = {
-        title: "",
-        notes: "",
-        private: false,
-      };
+      resetData();
     } else {
       emit("updateTask", taskData.value);
-      taskData.value = {
-        title: "",
-        notes: "",
-        private: false,
-      };
+      resetData();
     }
   }
 }
-
-onUpdated(() => {
-  if (props.flag) {
-    taskData.value = props.task;
-    console.log(props.flag);
+const resetData = () => {
+  taskData.value = {
+    title: "",
+    notes: "",
+    private: false,
+  };
+}
+watch(props, (value) => {
+  if (props.task) taskData.value = props.task;
+})
+watch(props, (value) => {
+  if (props.flag && !isEditing.value) {
+    isEditing.value = true;
+    const el = document.getElementById('inputhandler');
+    el.scrollIntoView({behavior: 'smooth', block: 'end'});
+    setTimeout(() => {
+      el.focus();
+    },800);
   }
-});
+}); 
 </script>
 
 <template>
-  <div class="main">
-    <div class="header">
+  <div :class="mainClass">
+    <div :class="headerClass">
       {{ heading }}
     </div>
     <form @submit.prevent="validate">
       <input
+        id="inputhandler"
         class="taskname"
         type="text"
         placeholder="Task name"
@@ -76,22 +90,34 @@ onUpdated(() => {
       <input class="checkbox" type="checkbox" v-model="taskData.private" />
       <input class="submit" type="submit" :value="submit" />
     </form>
+    <div v-if="flag" class="task">
+      <TaskItem :task="props.task" :editMode="true"/>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.main {
+.mainy {
   display: grid;
   margin: 2rem auto;
   width: 1435px;
   background:rgba(107, 57, 0, 0.26);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 6px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  font-family: cursive;
+}
+
+.main-edit {
+  border: 1px solid yellow;
 }
 
 .header {
   margin-top: 1rem;
   text-align: center;
   font-size: 3rem;
+}
+
+.header-edit {
+  color: yellow;
 }
 
 form {
@@ -107,6 +133,10 @@ form {
 
 .tasknotes {
   flex: 3 1 30ch;
+}
+
+.task {
+  margin: 0 auto 1rem;
 }
 
 input {
@@ -132,12 +162,12 @@ input {
 }
 
 @media screen and (max-width: 1460px) {
-  .main {
+  .mainy {
     width: 960px;
   }
 }
 @media screen and (max-width: 977px) {
-  .main {
+  .mainy {
     width: 92vw;
   }
 }
