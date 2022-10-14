@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, defineProps, onUpdated, watch } from "vue";
+import { ref, computed, defineProps, watch } from "vue";
 import TaskItem from './TaskItem.vue';
 
 const emit = defineEmits(["addTask", "updateTask","cancelEdit"]);
@@ -15,6 +15,11 @@ let taskData = ref({
 
 const isError = ref(false);
 const isEditing = ref(false);
+const isPadlock = ref(false);
+
+const padlockImg = computed(() => {
+  return isPadlock.value ? 'images/padlock.png' : 'images/unpadlock.png';
+})
 
 const mainClass = computed(() => {
   return props.flag ? 'mainy main-edit' : 'mainy'; 
@@ -28,6 +33,9 @@ const heading = computed(() => {
 const submit = computed(() => {
   return !props.flag ? 'Add Task' : 'Edit Task';
 });
+const togglePadlock = () => {
+  isPadlock.value = !isPadlock.value;
+}
 function validate() {
   if (!taskData.value.title) {
     console.log("error");
@@ -37,11 +45,15 @@ function validate() {
     }, 1500);
   } else {
     if (!props.flag) {
+      taskData.value.private = isPadlock.value;
       emit("addTask", taskData.value);
       resetData();
+      isPadlock.value = false;
     } else {
+      taskData.value.private = isPadlock.value;
       emit("updateTask", taskData.value);
       resetData();
+      isPadlock.value = false;
     }
   }
 }
@@ -60,6 +72,7 @@ const resetData = () => {
 watch(props, (value) => {
   if (props.task) {
     taskData.value = props.task;
+    isPadlock.value = props.task.is_private;
     isEditing.value = false;
   }
 })
@@ -94,7 +107,7 @@ watch(props, (value) => {
         placeholder="Task notes"
         v-model="taskData.notes"
       />
-      <input class="checkbox" type="checkbox" v-model="taskData.private" />
+      <img class="checkbox" type="checkbox" :src="padlockImg" @click="togglePadlock"/>
       <input class="submit" type="submit" :value="submit" />
     </form>
     <div v-if="flag" class="task">
@@ -139,9 +152,8 @@ form {
   font-family: cursive;
   display: block;
   color: darkred;
-  font-size: 16px;
+  font-size: 24px;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.082) ;
   text-align: center;
   margin: 0 auto;
   width: 70px;

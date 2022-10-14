@@ -88,7 +88,7 @@ async function signUp() {
  left: 50%;
  transform: translate(-50%, -50%);
  width: 400px;
- background: white;
+ background: rgba(54, 33, 0, 0.521);
  border-radius: 10px;
 }
 
@@ -96,7 +96,7 @@ async function signUp() {
   text-align: center;
   padding: 0 0 20px 0;
   border-bottom: 1px solid silver;
-  color: #2691d9; 
+  color: #d98b26; 
 }
 
 .main form {
@@ -106,7 +106,7 @@ async function signUp() {
 
 form .text-field {
   position: relative;
-  border-bottom: 2px solid #adadad;
+  border-bottom: 2px solid #ffffff;
   margin: 30px 0;
 }
 
@@ -118,15 +118,16 @@ form .text-field {
   border: none;
   background: none;
   outline: none;
+  color: white;
 }
 
 .text-field label {
   position: absolute;
   top: 50%;
   left: 5px;
-  color: #adadad;
+  color: #ff9100;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 32px;
   pointer-events: none;
   transition: .5s;
 }
@@ -138,14 +139,14 @@ form .text-field {
   left:0;
   width: 0%;
   height: 2px;
-  background: #2691d9;
+  background: #d98b26;
   transition: .5s;
 }
 
 .text-field input:focus ~ label,
 .text-field input:valid ~ label {
   top: -5px;
-  color: #2691d9;
+  color: #d98b26;
 }
 
 .text-field input:focus ~ span::before,
@@ -156,7 +157,7 @@ form .text-field {
 .signup-opt {
   text-decoration: none;
   font-weight: 700;
-  color: #2691d9;
+  color: #ffb350;
 }
 
 .signup-opt:hover {
@@ -167,10 +168,10 @@ form .text-field {
   width: 100%;
   height: 50px;
   border: 1px solid;
-  background: #2691d9;
+  background: #2c120048;
   border-radius: 25px;
   font-size: 18px;
-  color: #e9f4fb;
+  color: #ffffff;
   cursor: pointer;
   outline: none;
 }
@@ -178,11 +179,12 @@ form .text-field {
 
 
 .btn-sign-up:hover {
-  border-color: #2691d9;
+  border-color: #d98b26;
   transition: .5s;
 }
 
 p {
+  font-family: cursive;
   text-align: center;
   margin: 30px 0;
   font-size: 16px;
@@ -190,9 +192,10 @@ p {
 }
 
 p span {
+  font-family: cursive;
   text-decoration: none;
   margin: -5px 0 20px 5px;
-  color: #a6a6a6;
+  color: #ffffff;
 }
 
 </style>

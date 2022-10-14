@@ -40,16 +40,16 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Gabriola', cursive;
-  min-width: 100vw;
+
   min-height: 100vh;
 }
 
 #app {
-  background-image: url('./assets/theme.jpg');
+  background-image: url('./assets/themetest2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-width: 100vw;
+
   min-height: 100vh;
 }
 

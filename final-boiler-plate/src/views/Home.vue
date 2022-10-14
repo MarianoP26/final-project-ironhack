@@ -152,6 +152,7 @@ onMounted(() => {
 <style scoped>
 
 .main {
+  min-height: 100vh;
   background-image: url('../assets/backtile1.jpg');
 }
 

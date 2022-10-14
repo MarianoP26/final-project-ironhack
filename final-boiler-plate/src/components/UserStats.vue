@@ -39,6 +39,7 @@ const avgTimeCompletion = computed(() => {
     totalTime += timer[i];
   }
   let avgTime = totalTime / timer.length;
+  if (completedTasks.length === 0) return 'No tasks completed yet';
   return toTime(avgTime);
 })
 const maxTimeCompletion = computed(() => {
@@ -61,6 +62,7 @@ const maxTimeCompletion = computed(() => {
       }
     })
   maxCompletedTimeTaskItem.value = taskItem;
+  if (completedTasks.length === 0) return 'No tasks completed yet';
   return toTime(Math.max(...timer));
 })
 const minTimeCompletion = computed(() => {
@@ -87,11 +89,13 @@ const minTimeCompletion = computed(() => {
     }
   })
   minCompletedTimeTaskItem.value = taskItem;
+  if (completedTasks.length === 0) return 'No tasks completed yet';
   return toTime(Math.min(...timer));
 })
 const maxTimePending = computed(() => {
   let pendingTasks = [...props.tasks].filter((task) => !task.is_complete);
   let maxPendingTimeTask = pendingTasks[pendingTasks.length - 1];
+  if (pendingTasks.length === 0) return 'No pending tasks';
   maxPendingTimeTaskItem.value = maxPendingTimeTask;
   return timestampToRenderString(maxPendingTimeTask.inserted_at);
 })
@@ -148,7 +152,7 @@ const redirect = (code, task) => {
 </script>
 
 <template>
-  <div class="main">
+  <div class="mainstats">
     <div class="container">
       <div class="content">
         <div class="heading">
@@ -205,7 +209,7 @@ h2{
 }
 
 .body {
-  margin: 1rem;
+  margin: 1rem 1rem 0 1 rem;
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
@@ -215,11 +219,13 @@ h2{
 }
 
 .box {
+  margin: 1rem;
   display: flex;
   flex-direction: column;
 }
 
 .box-body {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   padding: 1rem 4rem;
   border: 1px solid black;
 }

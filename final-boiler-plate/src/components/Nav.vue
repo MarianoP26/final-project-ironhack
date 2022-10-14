@@ -45,7 +45,7 @@ watch(props, (value) => {
 </script>
 
 <template>
-  <div class="main">
+  <div class="mainavbar">
     <div class="container">
       <div class="navbar">
         <div class="logobg logosm"></div>

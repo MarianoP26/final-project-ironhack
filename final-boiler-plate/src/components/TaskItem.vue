@@ -91,7 +91,7 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
 </script>
 
 <template>
-  <div class="main">
+  <div class="maintaskitem">
     <div :class="task.is_complete && !editMode && 'container finished' || !task.is_complete && editMode && 'container container-shrink' || 'container'">
       <div class="wrapper">
         <div class="banner-image">
@@ -130,12 +130,12 @@ const toTime = (timestamp) => { // Just a translator from Milliseconds to Days H
   align-items: center;
   justify-content:center;
   text-align: center;
-  width: 400px;
+  width: 330px;
   height: 298px;
 }
 
 .container-shrink {
-  width: 350px;
+  width: 300px;
   height: 200px;
 }
 

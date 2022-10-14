@@ -85,17 +85,6 @@ const signIn = async () => {
 
 <style scoped>
 
-.logo {
-  position: absolute;
-  background-image: url('../assets/logohorizontal.png');
-  background-repeat: no-repeat;
-  width: 200px;
-  height: 100%;
-  top: 20%;
-  left: 50%;
-  transform: translate(-35%, -50%);
-}
-
 .main {
  position: absolute;
  top: 50%;
@@ -109,8 +98,8 @@ const signIn = async () => {
 .main h1{
   text-align: center;
   padding: 0 0 20px 0;
-  border-bottom: 1px solid silver; 
-  color: #2691d9;
+  border-bottom: 1px solid rgb(255, 255, 255); 
+  color: #d98b26;
 }
 
 .main form {
@@ -120,7 +109,7 @@ const signIn = async () => {
 
 form .text-field {
   position: relative;
-  border-bottom: 2px solid #adadad;
+  border-bottom: 2px solid #ffffff;
   margin: 30px 0;
 }
 
@@ -132,15 +121,16 @@ form .text-field {
   border: none;
   background: none;
   outline: none;
+  color: white;
 }
 
 .text-field label {
   position: absolute;
   top: 50%;
   left: 5px;
-  color: #adadad;
+  color: #ff9100;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 32px;
   pointer-events: none;
   transition: .5s;
 }
@@ -152,14 +142,14 @@ form .text-field {
   left:0;
   width: 0%;
   height: 2px;
-  background: #2691d9;
+  background: #d98b26;
   transition: .5s;
 }
 
 .text-field input:focus ~ label,
 .text-field input:valid ~ label {
   top: -5px;
-  color: #2691d9;
+  color: #d98b26;
 }
 
 .text-field input:focus ~ span::before,
@@ -172,19 +162,19 @@ p {
   text-align: center;
   margin: 30px 0;
   font-size: 16px;
-  color: #666666;
+  color: #646464;
 }
 
 p span {
   text-decoration: none;
   margin: -5px 0 20px 5px;
-  color: #a6a6a6;
+  color: #ffffff;
 }
 
 .signup-opt {
   text-decoration: none;
   font-weight: 700;
-  color: #2691d9;
+  color: #ffb350;
 }
 .signup-opt:hover {
   text-decoration: underline;
@@ -203,7 +193,7 @@ p span {
 }
 
 .btn-sign-in:hover {
-  border-color: #2691d9;
+  border-color: #d98b26;
   transition: .5s;
 }
 

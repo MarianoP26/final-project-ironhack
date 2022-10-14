@@ -111,7 +111,7 @@ const resetFilterSettings = () => {
 </script>
 
 <template>
-  <div class="main">
+  <div class="mainfilter">
     <div class="container">
       <div class="searchbar">
         <input type="text" placeholder="Search by title..." v-model="filterStates.search" @keyup="emitFilters">
