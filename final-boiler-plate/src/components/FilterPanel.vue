@@ -119,8 +119,8 @@ const resetFilterSettings = () => {
       <div class="filters">
         <button class="btn-reset" @click="resetFilterSettings">Reset</button>
         <Button class="btn" @click="nextCompleted(filterStates.completed)"><img :src="completedFilterState"></Button>
-        <Button :class="filterStates.alpha && 'btn-on' || 'btn-off'" @click="nextAlpha(filterStates.alpha)"><img :src="alphaFilterState"></Button>
         <Button :class="filterStates.private && 'btn-on' || 'btn-off'" @click="nextPrivate(filterStates.private)"><img :src="privateFilterState"></Button>
+        <Button :class="filterStates.alpha && 'btn-on' || 'btn-off'" @click="nextAlpha(filterStates.alpha)"><img :src="alphaFilterState"></Button>
         <Button :class="filterStates.time && 'btn-on' || 'btn-off'" @click="nextTime(filterStates.time)"><img :src="timeFilterState"></Button>
       </div>
     </div>
