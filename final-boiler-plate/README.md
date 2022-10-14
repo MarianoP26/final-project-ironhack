@@ -91,7 +91,9 @@ Created UserStats component mounted @Home.
 - Now a message appears if there no tasks to show.  
 - Now if the time shown in @TaskItem is less than 1 minute it will say 'less than a minute'.  
 
-## Ending plans  
+## Ending:  
 - Add Logo Title @Signin & @Signup.  
-- Create Tooltip component.  
 - Switch checkbox @NewTask to a padlock icon.  
+- Fixed lots of issues regarding backgrounds.  
+- Complete responsiveness across all the web in all devices.  
+- Changed theme.  
