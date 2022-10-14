@@ -180,7 +180,7 @@ const redirect = (code, task) => {
               <h2>Time related stats</h2>
             </div>
             <div class="box-body">
-              <h3>Average completion time: {{avgTimeCompletion}}</h3>
+              <h3 @click="redirect('COMPLETED_TASKS')">Average completion time: {{avgTimeCompletion}}</h3>
               <h4 @click="redirect('MIN_TIME_TASK', minCompletedTimeTaskItem)">Minimum completion time: {{minTimeCompletion}}</h4>
               <h4 @click="redirect('MAX_TIME_TASK', maxCompletedTimeTaskItem)">Maximum completion time: {{maxTimeCompletion}}</h4>
               <h4 @click="redirect('MAX_PENDING_TIME_TASK', maxPendingTimeTaskItem)">Maximum task pending time: {{maxTimePending}}</h4>
