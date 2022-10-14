@@ -90,7 +90,7 @@ const signIn = async () => {
  top: 50%;
  left: 50%;
  transform: translate(-50%, -50%);
- width: 400px;
+ width: 350px;
  background: rgba(54, 33, 0, 0.521);
  border-radius: 10px;
 }
@@ -130,7 +130,7 @@ form .text-field {
   left: 5px;
   color: #ff9100;
   transform: translateY(-50%);
-  font-size: 32px;
+  font-size: 24px;
   pointer-events: none;
   transition: .5s;
 }
@@ -148,7 +148,7 @@ form .text-field {
 
 .text-field input:focus ~ label,
 .text-field input:valid ~ label {
-  top: -5px;
+  top: -10px;
   color: #d98b26;
 }
 

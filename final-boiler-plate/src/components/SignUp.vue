@@ -87,7 +87,7 @@ async function signUp() {
  top: 50%;
  left: 50%;
  transform: translate(-50%, -50%);
- width: 400px;
+ width: 350px;
  background: rgba(54, 33, 0, 0.521);
  border-radius: 10px;
 }
